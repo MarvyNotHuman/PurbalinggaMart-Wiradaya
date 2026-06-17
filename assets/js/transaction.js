@@ -220,7 +220,7 @@
                 shipping_original: tx.shippingOriginal,
                 shipping_type:     JSON.stringify(tx.shippingType),
                 shipping_label:    tx.shippingLabel,
-                notes:             JSON.stringify(tx.notes),
+                notes:             typeof tx.notes === "string" ? tx.notes : (tx.notes ? JSON.stringify(tx.notes) : ""),
                 discount:          tx.discount,
                 service_fee:       tx.serviceFee,
                 total:             tx.total,
