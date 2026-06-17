@@ -1,0 +1,856 @@
+/* ================================================================
+   PURBALINGGA MART — theme.css
+   Global Dark Navy + Orange Theme Override
+   Import after all other CSS files to take effect everywhere
+   ================================================================ */
+
+/* ── Design Tokens: Dark Navy + Orange ───────────────────────── */
+:root {
+  /* Primary palette */
+  --g:     #f97316;   /* orange primary (was green) */
+  --g-dk:  #ea6e0e;   /* orange dark */
+  --g-xdk: #c2570a;   /* orange xdark */
+  --g-lt:  #fed7aa;   /* orange light */
+  --g-xlt: #fff7ed;   /* orange xlight */
+
+  /* Surface / background */
+  --bg:    #f0f2f5;
+  --wh:    #ffffff;
+  --surf:  #ffffff;
+
+  /* Navy/Dark surfaces */
+  --navy:  #0f1923;
+  --navy-2:#162030;
+  --navy-3:#1d2d3f;
+  --navy-s:#1a2b3c;
+
+  /* Border */
+  --brd:   #e2e8f0;
+  --brd-lt:#f1f5f9;
+
+  /* Text */
+  --txt:   #111827;
+  --txt-m: #6b7280;
+  --txt-lt:#9ca3af;
+
+  /* State colors (unchanged) */
+  --or:    #f97316;
+  --rd:    #ef4444;
+  --bl:    #3b82f6;
+  --yl:    #f59e0b;
+  --pu:    #8b5cf6;
+
+  /* Shadows with orange tint */
+  --sh-xs: 0 1px 2px rgba(0,0,0,.05);
+  --sh-sm: 0 1px 3px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.06);
+  --sh-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.05);
+  --sh-lg: 0 10px 15px rgba(0,0,0,.10), 0 4px 6px rgba(0,0,0,.05);
+  --sh-xl: 0 20px 25px rgba(0,0,0,.13), 0 8px 10px rgba(0,0,0,.05);
+  --sh-g:  0 4px 14px rgba(249,115,22,.35);  /* orange glow */
+
+  /* Sidebar (seller) */
+  --sidebar-bg: #0f1923;
+}
+
+/* ================================================================
+   TOPBAR — dark navy
+   ================================================================ */
+.topbar {
+  background: var(--navy) !important;
+}
+.topbar-left span {
+  background: rgba(249,115,22,.2) !important;
+  color: #fdba74 !important;
+}
+.tb-link {
+  color: rgba(255,255,255,.78) !important;
+  border-color: rgba(255,255,255,.2) !important;
+}
+.tb-link:hover {
+  background: rgba(249,115,22,.18) !important;
+  color: #fdba74 !important;
+}
+
+/* ================================================================
+   NAVBAR — white with orange accents
+   ================================================================ */
+.navbar {
+  background: var(--wh) !important;
+  border-bottom: 1px solid var(--brd) !important;
+}
+.brand-logo {
+  background: var(--navy) !important;
+  box-shadow: none !important;
+}
+.brand-name {
+  color: var(--navy) !important;
+  font-weight: 900 !important;
+  letter-spacing: -.5px !important;
+}
+.searchbar input:focus {
+  border-color: var(--g) !important;
+}
+.search-btn {
+  background: var(--navy) !important;
+}
+.search-btn:hover {
+  background: var(--navy-3) !important;
+}
+.nav-btn-solid {
+  background: var(--g) !important;
+  border-color: var(--g) !important;
+}
+.nav-btn-solid:hover {
+  background: var(--g-dk) !important;
+  border-color: var(--g-dk) !important;
+}
+.nav-btn-ghost:hover {
+  color: var(--g) !important;
+  border-color: var(--g) !important;
+  background: var(--g-xlt) !important;
+}
+.cart-btn:hover {
+  border-color: var(--g) !important;
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   CATEGORY NAV — orange underline tab
+   ================================================================ */
+.cat-pill:hover,
+.cat-pill.active {
+  color: var(--g) !important;
+}
+.cat-pill.active {
+  border-bottom-color: var(--g) !important;
+}
+
+/* ================================================================
+   HERO — dark navy
+   ================================================================ */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 50%, #0a1520 100%) !important;
+  border-radius: 0 !important;
+}
+.hero::before {
+  background: radial-gradient(circle, rgba(249,115,22,.12) 0%, transparent 65%) !important;
+}
+.hero-eyebrow {
+  background: rgba(249,115,22,.18) !important;
+  border-color: rgba(249,115,22,.35) !important;
+  color: #fdba74 !important;
+}
+.hero h1 em {
+  color: var(--g) !important;
+}
+.hero-cta-wh {
+  background: var(--g) !important;
+  color: #fff !important;
+  border-color: var(--g) !important;
+}
+.hero-cta-wh:hover {
+  background: var(--g-dk) !important;
+}
+.hero-cta-ol {
+  background: transparent !important;
+  color: rgba(255,255,255,.88) !important;
+  border-color: rgba(255,255,255,.4) !important;
+}
+.hero-cta-ol:hover {
+  background: rgba(255,255,255,.12) !important;
+  border-color: #fff !important;
+}
+.cd-unit {
+  background: rgba(249,115,22,.18) !important;
+  border: 1px solid rgba(249,115,22,.3) !important;
+}
+.hero-cd-box {
+  background: rgba(255,255,255,.07) !important;
+  border-color: rgba(255,255,255,.15) !important;
+}
+
+/* ================================================================
+   PROMO STRIP — keep orange gradient, ensure consistency
+   ================================================================ */
+.promo-strip {
+  background: linear-gradient(90deg, var(--navy), var(--navy-3)) !important;
+  border-top: 1px solid rgba(249,115,22,.25) !important;
+  border-bottom: 1px solid rgba(249,115,22,.25) !important;
+}
+.ps-tag {
+  background: rgba(249,115,22,.25) !important;
+  color: #fdba74 !important;
+}
+.ps-text {
+  color: rgba(255,255,255,.8) !important;
+}
+
+/* ================================================================
+   SIDEBAR FILTERS — clean white, orange accents
+   ================================================================ */
+.fbox-reset {
+  color: var(--g) !important;
+}
+.fbox-reset:hover {
+  color: var(--g-dk) !important;
+}
+.price-apply {
+  background: var(--navy) !important;
+}
+.price-apply:hover {
+  background: var(--navy-3) !important;
+}
+.price-input:focus {
+  border-color: var(--g) !important;
+}
+.r-btn:hover, .r-btn.active {
+  border-color: var(--g) !important;
+  background: var(--g-xlt) !important;
+  color: var(--g) !important;
+}
+.filter-opt input[type="checkbox"] {
+  accent-color: var(--g) !important;
+}
+
+/* ================================================================
+   TOOLBAR
+   ================================================================ */
+.result-info strong {
+  color: var(--g) !important;
+}
+.sort-sel:focus, .mob-filter-btn:hover {
+  border-color: var(--g) !important;
+}
+.mob-filter-btn:hover {
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   PRODUCT CARDS — white cards, orange accents
+   ================================================================ */
+.badge-bs {
+  background: var(--navy) !important;
+}
+.badge-org {
+  background: var(--g) !important;
+  color: #fff !important;
+}
+.pcard-price {
+  color: var(--navy) !important;
+  font-weight: 800 !important;
+}
+.pcard:hover {
+  box-shadow: 0 8px 28px rgba(249,115,22,.18), var(--sh-xl) !important;
+  border-color: rgba(249,115,22,.2) !important;
+}
+
+/* Product card action buttons */
+.pact-detail {
+  background: var(--navy) !important;
+  color: #fff !important;
+  border: none !important;
+}
+.pact-detail:hover {
+  background: var(--navy-3) !important;
+}
+.pact-cart {
+  background: var(--g) !important;
+  color: #fff !important;
+}
+.pact-cart:hover {
+  background: var(--g-dk) !important;
+}
+.pact-buy {
+  background: #fff7ed !important;
+  color: var(--g) !important;
+  border: 1.5px solid var(--g-lt) !important;
+}
+.pact-buy:hover {
+  background: var(--g-lt) !important;
+}
+
+/* ================================================================
+   SECTIONS — orange accent links
+   ================================================================ */
+.sec-title h2 {
+  color: var(--navy) !important;
+}
+.sec-link {
+  color: var(--g) !important;
+  background: var(--g-xlt) !important;
+  border-color: var(--g-lt) !important;
+}
+.sec-link:hover {
+  color: #fff !important;
+  background: var(--g) !important;
+  border-color: var(--g) !important;
+  box-shadow: 0 4px 12px rgba(249,115,22,.3) !important;
+}
+
+/* ================================================================
+   CATEGORY TILES — navy/orange active state
+   ================================================================ */
+.cat-tile:hover, .cat-tile.active {
+  background: var(--g-xlt) !important;
+  border-color: var(--g-lt) !important;
+  box-shadow: 0 4px 14px rgba(249,115,22,.2) !important;
+}
+.cat-tile:hover .ct-name, .cat-tile.active .ct-name {
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   STORE CARDS
+   ================================================================ */
+.sc-av {
+  border-color: var(--g-lt) !important;
+}
+.sc-count {
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   CHATBOT FAB — orange
+   ================================================================ */
+.chat-fab {
+  background: var(--g) !important;
+  box-shadow: 0 4px 18px rgba(249,115,22,.5) !important;
+}
+.chat-fab:hover {
+  background: var(--g-dk) !important;
+}
+.chat-pulse {
+  background: var(--navy) !important;
+}
+.cw-head {
+  background: var(--navy) !important;
+}
+.cw-status::before {
+  background: var(--g) !important;
+}
+.cw-close {
+  background: rgba(255,255,255,.12) !important;
+}
+.cw-close:hover {
+  background: rgba(255,255,255,.22) !important;
+}
+.user .bubble {
+  background: var(--g) !important;
+}
+.qbtn {
+  background: var(--g-xlt) !important;
+  color: var(--g) !important;
+  border-color: var(--g-lt) !important;
+}
+.qbtn:hover {
+  background: var(--g-lt) !important;
+}
+.cw-send {
+  background: var(--g) !important;
+}
+.cw-send:hover {
+  background: var(--g-dk) !important;
+}
+.cw-input input:focus {
+  border-color: var(--g) !important;
+}
+
+/* ================================================================
+   MODALS — orange primary buttons
+   ================================================================ */
+.pm-buy, .am-login {
+  background: var(--g) !important;
+}
+.pm-buy:hover, .am-login:hover {
+  background: var(--g-dk) !important;
+}
+.pm-price {
+  color: var(--navy) !important;
+}
+.pm-cart {
+  background: var(--g-xlt) !important;
+  color: var(--g) !important;
+  border-color: var(--g-lt) !important;
+}
+.pm-cart:hover {
+  background: var(--g-lt) !important;
+}
+
+/* ================================================================
+   TOAST
+   ================================================================ */
+.toast.ok {
+  background: var(--navy) !important;
+}
+
+/* ================================================================
+   FOOTER — dark navy
+   ================================================================ */
+.footer {
+  background: var(--navy) !important;
+}
+.foot-brand-ico {
+  background: var(--g) !important;
+}
+.soc-btn:hover {
+  background: var(--g) !important;
+}
+.foot-link:hover {
+  color: var(--g) !important;
+}
+.foot-contact-row svg {
+  stroke: var(--g) !important;
+}
+.footer-bot-in em {
+  color: var(--g) !important;
+}
+.foot-bot-links a:hover {
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   BUTTONS — generic .pm-btn-green used in sidebar
+   ================================================================ */
+.pm-btn-green {
+  background: var(--g) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all .22s ease !important;
+}
+.pm-btn-green:hover {
+  background: var(--g-dk) !important;
+}
+.af-cancel-btn {
+  background: #f1f5f9 !important;
+  color: var(--txt-m) !important;
+  border: 1.5px solid var(--brd) !important;
+  border-radius: 8px !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all .22s ease !important;
+}
+.af-cancel-btn:hover {
+  background: var(--brd) !important;
+}
+
+/* ================================================================
+   LOGIN PAGE — dark navy left panel
+   ================================================================ */
+.auth-left {
+  background: linear-gradient(145deg, var(--navy) 0%, var(--navy-2) 45%, #0a1520 100%) !important;
+}
+.auth-left::before, .auth-left::after {
+  background: rgba(249,115,22,.07) !important;
+}
+.al-headline em {
+  color: var(--g) !important;
+}
+.cr-seller {
+  background: rgba(249,115,22,.2) !important;
+  color: #fdba74 !important;
+}
+.al-creds-btn:hover {
+  background: rgba(249,115,22,.2) !important;
+  color: #fdba74 !important;
+}
+.auth-sub a {
+  color: var(--g) !important;
+}
+.role-tab.active {
+  color: var(--g) !important;
+}
+.form-input:focus {
+  border-color: var(--g) !important;
+  box-shadow: 0 0 0 3px rgba(249,115,22,.12) !important;
+}
+.form-submit {
+  background: var(--g) !important;
+}
+.form-submit:hover {
+  background: var(--g-dk) !important;
+}
+.auth-footer-text a {
+  color: var(--g) !important;
+}
+.auth-back:hover {
+  color: var(--g) !important;
+}
+.role-info {
+  background: var(--g-xlt) !important;
+  border-color: var(--g-lt) !important;
+  color: #7c2d12 !important;
+}
+.role-info svg {
+  stroke: var(--g) !important;
+}
+.register-page {
+  background: linear-gradient(135deg, var(--g-xlt) 0%, #f1f5f9 100%) !important;
+}
+.auth-card-logo {
+  background: var(--g) !important;
+}
+.form-select:focus {
+  border-color: var(--g) !important;
+  box-shadow: 0 0 0 3px rgba(249,115,22,.12) !important;
+}
+.strength-bar.strong {
+  background: var(--g) !important;
+}
+.terms-check input {
+  accent-color: var(--g) !important;
+}
+.step-dot.active {
+  background: var(--g) !important;
+}
+.step-dot.done {
+  background: var(--g-lt) !important;
+  color: var(--g-xdk) !important;
+}
+.step-connector.done {
+  background: var(--g-lt) !important;
+}
+
+/* ================================================================
+   SELLER PANEL — orange accents in dark sidebar
+   ================================================================ */
+.sb-logo {
+  background: var(--g) !important;
+  box-shadow: 0 4px 14px rgba(249,115,22,.35) !important;
+}
+.sb-store-av {
+  border-color: rgba(249,115,22,.5) !important;
+}
+.sb-store-badge {
+  background: rgba(249,115,22,.2) !important;
+  color: #fdba74 !important;
+}
+.sb-store-badge::before {
+  background: #fdba74 !important;
+}
+.sb-item.active {
+  background: rgba(249,115,22,.15) !important;
+  color: #fdba74 !important;
+  border-left-color: var(--g) !important;
+}
+.sb-item:hover {
+  background: rgba(255,255,255,.07) !important;
+}
+.sb-foot a {
+  color: rgba(249,115,22,.8) !important;
+}
+.sb-foot a:hover {
+  color: #fdba74 !important;
+}
+.sb-badge {
+  background: var(--rd) !important;
+}
+
+/* Seller dashboard buttons */
+.btn-solid {
+  background: var(--g) !important;
+}
+.btn-solid:hover {
+  background: var(--g-dk) !important;
+}
+.btn-outline:hover {
+  border-color: var(--g) !important;
+  color: var(--g) !important;
+  background: var(--g-xlt) !important;
+}
+
+/* Chart bars — orange gradient */
+.chart-bar {
+  background: linear-gradient(to top, var(--g), #fb923c) !important;
+}
+.mini-bar.active {
+  background: var(--g) !important;
+}
+
+/* Topbar search focus */
+.topbar-search input:focus {
+  border-color: var(--g) !important;
+}
+.tb-icon-btn:hover {
+  border-color: var(--g) !important;
+  color: var(--g) !important;
+  background: var(--g-xlt) !important;
+}
+.tb-profile:hover {
+  border-color: var(--g) !important;
+  background: var(--g-xlt) !important;
+}
+
+/* Stat cards */
+.ic-green {
+  background: var(--g-xlt) !important;
+  color: var(--g) !important;
+}
+
+/* Table */
+.prod-table tr:hover td, .recent-table tr:hover td {
+  background: var(--g-xlt) !important;
+}
+.page-btn:hover, .page-btn.active {
+  background: var(--g) !important;
+  border-color: var(--g) !important;
+}
+.status-badge.sb-active {
+  background: var(--g-xlt) !important;
+  color: var(--g) !important;
+}
+.status-badge.sb-active::before {
+  background: var(--g) !important;
+}
+.tbl-toggle {
+  background: var(--g-xlt) !important;
+  color: var(--g) !important;
+}
+.tbl-toggle:hover {
+  background: var(--g-lt) !important;
+}
+
+/* Form elements in seller panel */
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--g) !important;
+  box-shadow: 0 0 0 3px rgba(249,115,22,.1) !important;
+}
+.img-upload-zone:hover, .img-upload-zone.drag-over {
+  border-color: var(--g) !important;
+  background: var(--g-xlt) !important;
+}
+.upload-link {
+  color: var(--g) !important;
+}
+.toggle input:checked + .toggle-slider {
+  background: var(--g) !important;
+}
+
+/* Quick actions */
+.qa-item:hover {
+  border-color: var(--g) !important;
+  background: var(--g-xlt) !important;
+}
+.qa-item:hover .qa-arrow {
+  color: var(--g) !important;
+}
+
+/* Modal */
+.modal-close:hover {
+  background: var(--brd) !important;
+}
+
+/* ================================================================
+   CHECKOUT PAGE — orange accents
+   ================================================================ */
+.ck-nav-logo {
+  background: var(--navy) !important;
+}
+.ck-nav-name {
+  color: var(--navy) !important;
+}
+.ck-step.active .ck-step-num {
+  background: var(--g) !important;
+  border-color: var(--g) !important;
+}
+.ck-step.done .ck-step-num {
+  background: var(--g-lt) !important;
+  border-color: var(--g) !important;
+  color: var(--g-xdk) !important;
+}
+.ck-step.active {
+  color: var(--g-xdk) !important;
+}
+.ck-step-line.done {
+  background: var(--g-lt) !important;
+}
+.ck-nav-back:hover {
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   ORDERS PAGE
+   ================================================================ */
+.orders-tab.active, .ord-tab.active {
+  color: var(--g) !important;
+  border-bottom-color: var(--g) !important;
+}
+.orders-tab:hover, .ord-tab:hover {
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   PROFILE PAGE
+   ================================================================ */
+.prof-sidebar a.active, .prof-menu a.active {
+  color: var(--g) !important;
+  background: var(--g-xlt) !important;
+}
+.prof-sidebar a:hover, .prof-menu a:hover {
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   INVOICE PAGE
+   ================================================================ */
+.inv-logo-ico, .inv-head-logo {
+  background: var(--navy) !important;
+}
+.inv-status-paid {
+  background: var(--g-xlt) !important;
+  color: var(--g) !important;
+}
+
+/* ================================================================
+   PRODUCTS CSS (assets/css/products.css) dynamic cards
+   ================================================================ */
+.prod-card .prod-price {
+  color: var(--navy) !important;
+  font-weight: 800 !important;
+}
+.prod-action-btn.primary {
+  background: var(--g) !important;
+}
+.prod-action-btn.primary:hover {
+  background: var(--g-dk) !important;
+}
+.prod-action-btn.secondary {
+  background: var(--navy) !important;
+  color: #fff !important;
+}
+.prod-action-btn.secondary:hover {
+  background: var(--navy-3) !important;
+}
+.prod-verified-badge {
+  background: rgba(249,115,22,.15) !important;
+  color: var(--g) !important;
+  border-color: var(--g-lt) !important;
+}
+
+/* ================================================================
+   ADMIN PAGE
+   ================================================================ */
+/* Admin sidebar follows same tokens as seller sidebar — covered above */
+
+/* ================================================================
+   OPEN STORE / REGISTER STORE
+   ================================================================ */
+.os-step.active .os-step-num,
+.rs-step.active .rs-step-num {
+  background: var(--g) !important;
+}
+
+/* ================================================================
+   SCROLLBAR — subtle
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(249,115,22,.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249,115,22,.5);
+}
+
+/* ================================================================
+   HERO LOGO BOX (the MART card in the screenshot)
+   ================================================================ */
+.hero-brand-card {
+  flex-shrink: 0;
+  width: 160px; height: 160px;
+  background: var(--navy-3);
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--g);
+  letter-spacing: -1px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  border: 1px solid rgba(249,115,22,.2);
+}
+
+/* ================================================================
+   SECTION HEADINGS: MAKANAN & MINUMAN tabs (index page categories)
+   Match screenshot's horizontal tab look
+   ================================================================ */
+.cat-tab-row {
+  display: flex;
+  border-bottom: 2px solid var(--brd);
+  margin-bottom: 20px;
+  gap: 0;
+}
+.cat-tab {
+  padding: 11px 20px;
+  font-size: 13px; font-weight: 700;
+  color: var(--txt-m);
+  border: none; background: transparent;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all .2s ease;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.cat-tab.active {
+  color: var(--g);
+  border-bottom-color: var(--g);
+}
+.cat-tab:hover {
+  color: var(--g);
+}
+
+/* ================================================================
+   CARD VERIFIED BADGE (TERVERIFIKASI)
+   ================================================================ */
+.verified-pill {
+  position: absolute;
+  top: 8px; left: 8px;
+  font-size: 9px; font-weight: 700;
+  padding: 3px 9px;
+  background: rgba(249,115,22,.18);
+  color: var(--g);
+  border: 1px solid rgba(249,115,22,.35);
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  z-index: 2;
+}
+
+/* ================================================================
+   SELLER PANEL BUTTON in top-right corner (from screenshot)
+   ================================================================ */
+.seller-corner-btn {
+  position: fixed;
+  top: 12px; right: 16px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  z-index: 9999;
+  transition: all .2s ease;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.seller-corner-btn:hover {
+  background: var(--navy-3);
+}
+
+/* AI chatbot button override */
+.chat-fab span,
+#chat-fab span {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .5px !important;
+}

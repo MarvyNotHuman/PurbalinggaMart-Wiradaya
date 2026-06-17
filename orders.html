@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pesanan Saya — Purbalingga Mart</title>
+  <link rel="stylesheet" href="assets/css/invoice.css"/>
+  <style>
+    /* ── Orders page styles ── */
+    .ord-page { max-width: 960px; margin: 0 auto; padding: 24px 20px 60px; }
+
+    /* Stats */
+    .ord-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+    .ord-stat  { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:16px 18px; display:flex; align-items:center; gap:12px; }
+    .ord-stat-ico { width:38px; height:38px; border-radius:10px; display:grid; place-items:center; font-size:19px; flex-shrink:0; }
+    .ord-stat-label { font-size:11.5px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.3px; }
+    .ord-stat-val   { font-size:20px; font-weight:900; color:#1e293b; line-height:1; margin-top:2px; }
+
+    /* Filters */
+    .ord-filters { display:flex; gap:8px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:10px 14px; margin-bottom:16px; flex-wrap:wrap; align-items:center; }
+    .ord-filter-btn { padding:6px 16px; border:1.5px solid #e2e8f0; border-radius:7px; background:#f8fafc; font-size:12.5px; font-weight:600; color:#64748b; cursor:pointer; font-family:'Poppins',sans-serif; transition:all .2s; }
+    .ord-filter-btn:hover  { border-color:#16a34a; color:#16a34a; }
+    .ord-filter-btn.active { background:#16a34a; border-color:#16a34a; color:#fff; }
+    .ord-search { margin-left:auto; display:flex; align-items:center; gap:6px; background:#f1f5f9; border:1.5px solid #e2e8f0; border-radius:8px; padding:6px 12px; }
+    .ord-search input { border:none; background:transparent; font-size:13px; font-family:'Poppins',sans-serif; outline:none; color:#1e293b; width:180px; }
+    .ord-search svg { width:14px; height:14px; stroke:#94a3b8; fill:none; stroke-width:2; flex-shrink:0; }
+
+    /* Order list */
+    #orders-list { display:flex; flex-direction:column; gap:14px; }
+
+    /* Order card */
+    .ord-card { background:#fff; border:1px solid #e2e8f0; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.05); transition:all .2s; }
+    .ord-card:hover { box-shadow:0 6px 22px rgba(0,0,0,.08); transform:translateY(-1px); }
+
+    .ord-card-head { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; background:#f8fafc; border-bottom:1px solid #f1f5f9; }
+    .ord-card-head-left { display:flex; align-items:center; gap:10px; }
+    .ord-txid { font-size:12px; color:#94a3b8; font-family:'Courier New',monospace; letter-spacing:.3px; }
+    .ord-date  { font-size:12px; color:#94a3b8; }
+
+    /* Status badges */
+    .ord-status-badge { padding:4px 11px; border-radius:6px; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.3px; }
+    .os-pending  { background:#fef3c7; color:#92400e; }
+    .os-process  { background:#dbeafe; color:#1e40af; }
+    .os-sent     { background:#fed7aa; color:#9a3412; }
+    .os-done     { background:#dcfce7; color:#14532d; }
+
+    /* Products */
+    .ord-products { padding:14px 18px; display:flex; flex-direction:column; gap:10px; }
+    .ord-prod-row { display:flex; align-items:center; gap:12px; }
+    .ord-prod-row img { width:50px; height:50px; border-radius:9px; object-fit:cover; border:1px solid #f1f5f9; flex-shrink:0; }
+    .ord-prod-info { flex:1; min-width:0; }
+    .ord-prod-name { font-size:13px; font-weight:700; color:#1e293b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ord-prod-meta { font-size:11.5px; color:#94a3b8; margin-top:1px; }
+    .ord-prod-ship { font-size:11px; color:#15803d; margin-top:2px; font-weight:600; }
+    .ord-prod-sub  { font-size:13px; font-weight:800; color:#16a34a; white-space:nowrap; }
+    .ord-more-items{ font-size:12px; color:#64748b; font-weight:600; padding:4px 0; }
+    .ord-buyer-info{ padding:0 18px 10px; font-size:12px; color:#94a3b8; display:flex; align-items:center; gap:6px; }
+    .ord-buyer-info svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0; }
+
+    /* Footer */
+    .ord-card-foot { display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-top:1px solid #f8fafc; flex-wrap:wrap; gap:10px; }
+    .ord-payment   { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .ord-pay-method{ background:#f1f5f9; color:#64748b; padding:3px 10px; border-radius:5px; font-size:11px; font-weight:700; text-transform:none; letter-spacing:.3px; white-space:nowrap; }
+    .ord-total-label{ font-size:13px; color:#64748b; }
+    .ord-total     { font-weight:900; color:#16a34a; font-size:15px; }
+    .ord-actions   { display:flex; gap:7px; flex-wrap:wrap; }
+    .ord-btn { padding:7px 14px; border-radius:7px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif; border:1.5px solid #e2e8f0; background:#fff; color:#64748b; transition:all .2s; text-decoration:none; display:inline-flex; align-items:center; gap:5px; }
+    .ord-btn:hover { border-color:#16a34a; color:#16a34a; }
+    .ord-btn-invoice { background:#f0fdf4; border-color:#dcfce7; color:#15803d; }
+    .ord-btn-invoice:hover { background:#dcfce7; }
+    .ord-btn-print { background:#eff6ff; border-color:#bfdbfe; color:#1e40af; }
+    .ord-btn-print:hover { background:#dbeafe; }
+    .ord-btn-status { background:#16a34a; border-color:#16a34a; color:#fff; }
+    .ord-btn-status:hover { background:#15803d; }
+
+    /* Empty */
+    .ord-empty { text-align:center; padding:80px 20px; background:#fff; border:1px solid #e2e8f0; border-radius:14px; }
+    .ord-empty-icon  { font-size:56px; margin-bottom:14px; }
+    .ord-empty-title { font-size:18px; font-weight:800; color:#1e293b; margin-bottom:6px; }
+    .ord-empty-desc  { font-size:13.5px; color:#64748b; margin-bottom:20px; }
+    .ord-empty-btn   { display:inline-flex; align-items:center; gap:8px; padding:10px 24px; background:#16a34a; color:#fff; border-radius:9px; font-weight:700; text-decoration:none; font-size:13.5px; }
+
+    /* Admin stats */
+    #admin-tx-stats { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:16px 18px; margin-bottom:18px; }
+
+    @media(max-width:700px) {
+      .ord-stats { grid-template-columns:1fr 1fr; }
+      .ord-search { display:none; }
+      .ord-card-foot { flex-direction:column; align-items:flex-start; }
+    }
+    @media(max-width:480px) {
+      .ord-stats { grid-template-columns:1fr 1fr; }
+      .ord-prod-sub { display:none; }
+    }
+  
+    /* ── Orange Theme Overrides ── */
+    :root { --g: #f97316; --g-dk: #ea6e0e; --g-lt: #fed7aa; --g-xlt: #fff7ed; }
+    .ord-nav-logo, .pf-nav-logo { background: #0f1923 !important; }
+    .ord-tab-bar { border-bottom-color: #e2e8f0; }
+    .ord-tab.active { color: #f97316 !important; border-bottom-color: #f97316 !important; }
+    .ord-tab:hover { color: #f97316 !important; }
+    .ord-status-badge.pending { background: #fff7ed !important; color: #c2570a !important; }
+    .ord-status-badge.confirmed { background: #fff7ed !important; color: #f97316 !important; }
+    .btn-prim, .ord-action-btn.primary { background: #f97316 !important; color: #fff !important; border: none !important; }
+    .btn-prim:hover, .ord-action-btn.primary:hover { background: #ea6e0e !important; }
+    a[style*='#16a34a'], span[style*='#16a34a'] { color: #f97316 !important; }
+    .ord-price-total { color: #0f1923 !important; font-weight: 800 !important; }
+
+  </style>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="inv-nav">
+  <a href="index.html" class="inv-nav-brand">
+    <div class="inv-nav-logo">🏪</div>
+    <span class="inv-nav-name">PURBALINGGA MART</span>
+  </a>
+  <div class="inv-nav-acts">
+    <a href="index.html" class="inv-btn inv-btn-outline">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      Marketplace
+    </a>
+    <a href="checkout.html" class="inv-btn inv-btn-primary">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Checkout
+    </a>
+  </div>
+</nav>
+
+<div class="ord-page">
+
+  <!-- Page heading -->
+  <div style="margin-bottom:20px">
+    <h1 style="font-size:22px;font-weight:900;color:#1e293b" id="orders-heading">Pesanan Saya</h1>
+    <p style="font-size:13.5px;color:#64748b;margin-top:2px" id="orders-sub">Memuat data pesanan...</p>
+  </div>
+
+  <!-- Stats row -->
+  <div class="ord-stats">
+    <div class="ord-stat">
+      <div class="ord-stat-ico" style="background:#f0fdf4">📦</div>
+      <div>
+        <div class="ord-stat-label">Total Pesanan</div>
+        <div class="ord-stat-val" id="stat-total-orders">0</div>
+      </div>
+    </div>
+    <div class="ord-stat">
+      <div class="ord-stat-ico" style="background:#fffbeb">⏳</div>
+      <div>
+        <div class="ord-stat-label">Menunggu</div>
+        <div class="ord-stat-val" id="stat-pending-orders">0</div>
+      </div>
+    </div>
+    <div class="ord-stat">
+      <div class="ord-stat-ico" style="background:#f0fdf4">✅</div>
+      <div>
+        <div class="ord-stat-label">Selesai</div>
+        <div class="ord-stat-val" id="stat-done-orders">0</div>
+      </div>
+    </div>
+    <div class="ord-stat">
+      <div class="ord-stat-ico" style="background:#f5f3ff">💰</div>
+      <div>
+        <div class="ord-stat-label">Total Belanja</div>
+        <div class="ord-stat-val" id="stat-revenue" style="font-size:13px">Rp 0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin revenue stats -->
+  <div id="admin-tx-stats" style="display:none"></div>
+
+  <!-- Filter bar -->
+  <div class="ord-filters">
+    <button class="ord-filter-btn active" data-filter="all">Semua</button>
+    <button class="ord-filter-btn" data-filter="pending">⏳ Menunggu</button>
+    <button class="ord-filter-btn" data-filter="diproses">🔄 Diproses</button>
+    <button class="ord-filter-btn" data-filter="dikirim">🚚 Dikirim</button>
+    <button class="ord-filter-btn" data-filter="selesai">✅ Selesai</button>
+    <div class="ord-search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="orders-search" placeholder="Cari pesanan..." autocomplete="off"/>
+    </div>
+  </div>
+
+  <!-- Orders list -->
+  <div id="orders-list">
+    <div class="ord-empty">
+      <div class="ord-empty-icon">⏳</div>
+      <div class="ord-empty-title">Memuat Pesanan...</div>
+    </div>
+  </div>
+
+</div><!-- /ord-page -->
+
+<!-- Tracking Modal -->
+<div id="pm-tracking-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;overflow-y:auto;padding:20px">
+  <div style="background:#fff;border-radius:16px;max-width:500px;margin:0 auto;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)">
+    <div style="padding:18px 20px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:16px;font-weight:800;color:#1e293b">📦 Tracking Pengiriman</div>
+      <button onclick="document.getElementById('pm-tracking-modal').style.display='none'"
+              style="background:none;border:none;font-size:20px;cursor:pointer;color:#94a3b8;line-height:1">✕</button>
+    </div>
+    <div id="pm-tracking-content" style="padding:20px;min-height:120px">
+      <div style="text-align:center;padding:30px;color:#94a3b8">Memuat...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Notifikasi Panel -->
+<div id="pm-notif-panel" style="display:none;position:fixed;top:60px;right:16px;width:340px;max-height:480px;overflow-y:auto;background:#fff;border:1px solid #e2e8f0;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.12);z-index:8888">
+  <div style="padding:14px 16px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff">
+    <div style="font-size:14px;font-weight:800;color:#1e293b">🔔 Notifikasi</div>
+    <button onclick="document.getElementById('pm-notif-panel').style.display='none'"
+            style="background:none;border:none;font-size:16px;cursor:pointer;color:#94a3b8">✕</button>
+  </div>
+  <div id="pm-notif-list"><div style="padding:30px;text-align:center;color:#94a3b8;font-size:13px">Memuat...</div></div>
+</div>
+
+<!-- Scripts -->
+<script src="auth.js"></script>
+<script src="supabase-config.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/transaction.js"></script>
+<script src="assets/js/orders.js"></script>
+
+<script>
+  // Show admin stats row for admin users
+  document.addEventListener('DOMContentLoaded', () => {
+    const user = PM_AUTH.getCurrentUser();
+    if (user && (user.role === 'admin' || user.role === 'seller')) {
+      document.getElementById('admin-tx-stats').style.display = 'block';
+    }
+
+    // Mulai dengarkan notifikasi
+    if (user) {
+      PM_NOTIFY.startListen(user.id.toString(), (count) => {
+        // Optional: auto-refresh orders
+        if (count > 0 && document.hidden === false) {
+          // orders akan refresh sendiri via storage event
+        }
+      });
+    }
+  });
+
+  /* Buka tracking modal */
+  function openTracking(transactionId) {
+    const modal   = document.getElementById('pm-tracking-modal');
+    const content = document.getElementById('pm-tracking-content');
+    modal.style.display = 'block';
+    content.innerHTML = '<div style="text-align:center;padding:30px;color:#94a3b8">Memuat tracking...</div>';
+    PM_TRACK.renderTimeline(transactionId, content);
+    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+  }
+
+  /* Buka panel notifikasi */
+  async function openNotifPanel() {
+    const panel = document.getElementById('pm-notif-panel');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    if (panel.style.display === 'block') {
+      const user    = PM_AUTH.getCurrentUser();
+      const list    = document.getElementById('pm-notif-list');
+      list.innerHTML = await PM_NOTIFY.renderPanel(user?.id?.toString() || '');
+    }
+  }
+
+  /* Buka modal ulasan produk */
+  function openReview(productId, productName, transactionId) {
+    const user = PM_AUTH.getCurrentUser();
+    if (!user) { PM_AUTH.toast('Login dulu untuk beri ulasan', 'warn'); return; }
+    PM_RATING.openModal({
+      productId, productName, transactionId,
+      buyer: { id: user.id, name: user.name, avatar: user.avatar }
+    });
+  }
+
+  window.openTracking   = openTracking;
+  window.openNotifPanel = openNotifPanel;
+  window.openReview     = openReview;
+</script>
+</body>
+</html>

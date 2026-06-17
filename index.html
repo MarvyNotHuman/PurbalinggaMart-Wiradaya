@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Purbalingga Mart — Marketplace produk lokal UMKM Purbalingga. Temukan makanan khas, kerajinan, fashion, dan produk organik terbaik." />
+  <title>Purbalingga Mart — Marketplace Lokal Modern</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/products.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="topbar-left">🌿 Marketplace resmi produk lokal Purbalingga <span>100% UMKM Asli</span></div>
+    <div class="topbar-right">
+      <a href="register-store.html" class="tb-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        Daftar Toko
+      </a>
+      <a href="seller.html" class="tb-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+        Seller Panel
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="navbar-in">
+    <a href="index.html" class="brand" aria-label="Purbalingga Mart Home">
+      <div class="brand-logo">🏪</div>
+      <div class="brand-texts">
+        <span class="brand-name">PURBALINGGA MART</span>
+        <span class="brand-sub">Marketplace Lokal</span>
+      </div>
+    </a>
+    <div class="searchbar">
+      <input type="search" id="search-input" placeholder="Cari produk, toko, atau kategori..." autocomplete="off" aria-label="Cari produk" />
+      <button class="search-btn" id="search-btn" aria-label="Cari">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Cari
+      </button>
+    </div>
+    <nav class="nav-acts" aria-label="Navigasi utama">
+      <!-- Filled by auth.js -->
+      <a href="orders.html" class="nav-btn nav-btn-ghost" id="nav-orders-btn" style="font-size:13px;position:relative">
+        📋 Pesanan
+        <span class="cart-dot" id="orders-pending-dot" style="display:none">0</span>
+      </a>
+      <button class="cart-btn" aria-label="Keranjang">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-dot" id="cart-dot" style="display:none">0</span>
+      </button>
+      <a href="login.html" class="nav-btn nav-btn-ghost">Masuk</a>
+      <a href="register-store.html" class="nav-btn nav-btn-solid">Daftar Toko</a>
+    </nav>
+  </div>
+</header>
+
+<!-- CATEGORY NAV -->
+<nav class="cat-nav" aria-label="Kategori produk">
+  <div class="cat-nav-in">
+    <button class="cat-pill active" data-cat="semua">🏠 Semua</button>
+    <button class="cat-pill" data-cat="makanan">🍱 Makanan &amp; Minuman</button>
+    <button class="cat-pill" data-cat="kerajinan">🧶 Kerajinan &amp; Kriya</button>
+    <button class="cat-pill" data-cat="pertanian">🌾 Pertanian &amp; Organik</button>
+    <button class="cat-pill" data-cat="fashion">👗 Fashion</button>
+    <button class="cat-pill" data-cat="minuman">☕ Kopi &amp; Minuman</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-label="Banner utama">
+  <div class="hero-in">
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ SPESIAL HARI INI</div>
+      <h1>Belanja Mudah,<br><em>Dukung UMKM Lokal.</em></h1>
+      <p class="hero-desc">Temukan kerajinan kriya, aneka kuliner, dan produk unggulan khas Purbalingga.</p>
+      <div class="hero-btns">
+        <button class="hero-cta hero-cta-wh" onclick="PM_SECTIONS.scrollToProductsIfNeeded()">MULAI CARI PRODUK</button>
+        <a href="register-store.html" class="hero-cta hero-cta-ol">🏪 Buka Toko</a>
+      </div>
+      <div class="hero-stats">
+        <div class="h-stat"><div class="h-stat-n" id="stat-products">0+</div><div class="h-stat-l">Produk</div></div>
+        <div class="h-stat"><div class="h-stat-n" id="stat-stores">0+</div><div class="h-stat-l">Toko UMKM</div></div>
+        <div class="h-stat"><div class="h-stat-n" id="stat-locations">0</div><div class="h-stat-l">Kecamatan</div></div>
+      </div>
+    </div>
+    <div class="hero-brand-card" aria-label="Purbalingga Mart" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+      <span style="font-size:36px;font-weight:900;color:#f97316;letter-spacing:-2px;line-height:1">MART</span>
+      <span style="font-size:10px;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:2px;text-transform:uppercase">PURBALINGGA</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO STRIP -->
+<div class="promo-strip">
+  <div class="promo-strip-in">
+    <span class="ps-tag">🔥 PROMO</span>
+    <div class="ps-marquee">
+      <span class="ps-text" id="promo-strip-text">
+        Diskon 25% Nopia Pak Slamet &nbsp;·&nbsp; Bulu Mata Premium -30% &nbsp;·&nbsp;
+        Gula Kelapa Organik -22% &nbsp;·&nbsp; Gratis ongkir area Purbalingga &nbsp;·&nbsp;
+        Batik Tulis -16% &nbsp;·&nbsp; Flash Sale setiap Jumat pukul 12.00 WIB &nbsp;·&nbsp;
+        Daftarkan toko UMKM kamu sekarang!
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY TILES -->
+<section class="section" style="margin-top:22px">
+  <div class="sec-head">
+    <div class="sec-title"><span class="sec-icon">🗂️</span><h2>Kategori Produk</h2></div>
+  </div>
+  <div class="cat-tiles">
+    <div class="cat-tile active" data-cat="semua"    onclick="PM_SECTIONS.setCategory('semua')"><div class="ct-icon">🏠</div><div class="ct-name">Semua</div></div>
+    <div class="cat-tile" data-cat="makanan"          onclick="PM_SECTIONS.setCategory('makanan')"><div class="ct-icon">🍱</div><div class="ct-name">Makanan</div></div>
+    <div class="cat-tile" data-cat="kerajinan"        onclick="PM_SECTIONS.setCategory('kerajinan')"><div class="ct-icon">🧶</div><div class="ct-name">Kerajinan</div></div>
+    <div class="cat-tile" data-cat="pertanian"        onclick="PM_SECTIONS.setCategory('pertanian')"><div class="ct-icon">🌾</div><div class="ct-name">Pertanian</div></div>
+    <div class="cat-tile" data-cat="fashion"          onclick="PM_SECTIONS.setCategory('fashion')"><div class="ct-icon">👗</div><div class="ct-name">Fashion</div></div>
+    <div class="cat-tile" data-cat="minuman"          onclick="PM_SECTIONS.setCategory('minuman')"><div class="ct-icon">☕</div><div class="ct-name">Minuman</div></div>
+  </div>
+</section>
+
+<!-- ── MAIN LAYOUT: SIDEBAR + PRODUCT GRID ── -->
+<main class="layout" id="main-layout">
+
+  <!-- SIDEBAR FILTERS -->
+  <aside class="sidebar" aria-label="Filter produk">
+
+    <div class="fbox">
+      <div class="fbox-head">
+        <h3>Urutkan</h3>
+      </div>
+      <select class="price-input" id="filter-sort" style="width:100%;height:38px;margin-top:6px">
+        <option value="">Default (Terlaris)</option>
+        <option value="newest">Terbaru</option>
+        <option value="price_lo">Harga Termurah</option>
+        <option value="price_hi">Harga Termahal</option>
+        <option value="rating">Rating Tertinggi</option>
+        <option value="sold">Paling Laris</option>
+      </select>
+    </div>
+
+    <div class="fbox">
+      <div class="fbox-head"><h3>Lokasi</h3></div>
+      <select class="price-input" id="filter-location" style="width:100%;height:38px;margin-top:6px">
+        <option value="">Semua Lokasi</option>
+        <option value="Purbalingga Kota">Purbalingga Kota</option>
+        <option value="Bojongsari">Bojongsari</option>
+        <option value="Kertanegara">Kertanegara</option>
+        <option value="Bukateja">Bukateja</option>
+        <option value="Mrebet">Mrebet</option>
+        <option value="Karangreja">Karangreja</option>
+        <option value="Kutasari">Kutasari</option>
+        <option value="Padamara">Padamara</option>
+      </select>
+    </div>
+
+    <div class="fbox">
+      <div class="fbox-head"><h3>Rentang Harga</h3></div>
+      <div class="price-area">
+        <div class="price-row">
+          <input class="price-input" type="number" id="filter-min-price" placeholder="Min" min="0" />
+          <span class="price-sep">—</span>
+          <input class="price-input" type="number" id="filter-max-price" placeholder="Max" min="0" />
+        </div>
+      </div>
+    </div>
+
+    <div class="fbox">
+      <div class="fbox-head"><h3>Rating Minimum</h3></div>
+      <div class="rating-row">
+        <button class="r-btn" onclick="document.getElementById('filter-rating').value='4.5';document.getElementById('filter-apply').click()">⭐ 4.5+</button>
+        <button class="r-btn" onclick="document.getElementById('filter-rating').value='4.0';document.getElementById('filter-apply').click()">⭐ 4.0+</button>
+        <button class="r-btn" onclick="document.getElementById('filter-rating').value='3.5';document.getElementById('filter-apply').click()">⭐ 3.5+</button>
+      </div>
+      <input type="hidden" id="filter-rating" value="">
+    </div>
+
+    <div class="fbox">
+      <div class="fbox-head"><h3>Label Produk</h3></div>
+      <div class="filter-list">
+        <label class="filter-opt">
+          <input type="checkbox" id="filter-promo">
+          <label for="filter-promo">🔴 Ada Promo</label>
+        </label>
+        <label class="filter-opt">
+          <input type="checkbox" id="filter-stock">
+          <label for="filter-stock">✅ Ready Stock</label>
+        </label>
+      </div>
+    </div>
+
+    <div style="padding:12px 0;display:flex;gap:8px;flex-direction:column">
+      <button id="filter-apply" class="pm-btn-green" style="width:100%;padding:10px;font-size:13px">Terapkan Filter</button>
+      <button id="filter-reset" class="af-cancel-btn" style="width:100%;padding:10px;font-size:13px">Reset Filter</button>
+    </div>
+
+  </aside>
+
+  <!-- PRODUCTS SECTION -->
+  <section id="section-all-products" aria-label="Semua Produk">
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="result-info" id="products-count">Memuat produk...</div>
+      <div class="toolbar-right">
+        <select class="sort-sel" id="inline-sort" onchange="document.getElementById('filter-sort').value=this.value;document.getElementById('filter-apply').click()">
+          <option value="">Terlaris</option>
+          <option value="newest">Terbaru</option>
+          <option value="price_lo">Harga ↑</option>
+          <option value="price_hi">Harga ↓</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Main dynamic product grid -->
+    <div class="products-grid" id="products-main" aria-live="polite"></div>
+
+  </section>
+</main>
+
+<!-- ================================================================
+     SECTION: PRODUK TERBARU (Dynamic)
+     ================================================================ -->
+<section class="section" aria-label="Produk Terbaru">
+  <div class="sec-head">
+    <div class="sec-title">
+      <span class="sec-icon">🆕</span>
+      <h2>Produk Terbaru</h2>
+      <span class="sec-sub">Baru ditambahkan seller</span>
+    </div>
+    <button class="sec-link" onclick="PM_SECTIONS.setCategory('semua');PM_SECTIONS.scrollToProductsIfNeeded()">Lihat Semua<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+  </div>
+  <div class="hscroll">
+    <div class="products-grid" id="products-latest" style="display:flex;flex-wrap:nowrap;gap:14px;min-width:max-content"></div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION: PRODUK TERLARIS (Dynamic)
+     ================================================================ -->
+<section class="section" aria-label="Produk Terlaris">
+  <div class="sec-head">
+    <div class="sec-title">
+      <span class="sec-icon">🏆</span>
+      <h2>Produk Terlaris</h2>
+      <span class="sec-sub">Paling banyak dibeli</span>
+    </div>
+    <button class="sec-link" onclick="PM_SECTIONS.activeFilters={sort:'sold'};PM_SECTIONS.renderMainGrid();PM_SECTIONS.scrollToProductsIfNeeded()">Lihat Semua<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+  </div>
+  <div class="hscroll">
+    <div class="products-grid" id="products-bestseller" style="display:flex;flex-wrap:nowrap;gap:14px;min-width:max-content"></div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION: PROMO HARI INI (Dynamic)
+     ================================================================ -->
+<section class="section" aria-label="Promo Hari Ini">
+  <div style="background:linear-gradient(135deg,#dc2626,#f97316);border-radius:14px;padding:20px 26px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:16px;overflow:hidden;position:relative">
+    <div style="position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:80px;opacity:.12;pointer-events:none">⚡</div>
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,.75);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Flash Sale Hari Ini</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:4px">Promo Terbaik untuk Kamu!</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.80)">Diskon hingga <strong style="color:#fde047">30%</strong> — langsung dari seller UMKM Purbalingga</div>
+    </div>
+    <button onclick="PM_SECTIONS.activeFilters={promo:true};PM_SECTIONS.renderMainGrid();PM_SECTIONS.scrollToProductsIfNeeded()" style="background:#fff;color:#dc2626;border:none;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer;flex-shrink:0">
+      Lihat Promo →
+    </button>
+  </div>
+  <div class="hscroll">
+    <div class="products-grid" id="products-promo" style="display:flex;flex-wrap:nowrap;gap:14px;min-width:max-content"></div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION: TRENDING (Dynamic)
+     ================================================================ -->
+<section class="section" aria-label="Trending">
+  <div class="sec-head">
+    <div class="sec-title">
+      <span class="sec-icon">🔥</span>
+      <h2>Trending</h2>
+      <span class="sec-sub">Rating tertinggi saat ini</span>
+    </div>
+    <button class="sec-link" onclick="PM_SECTIONS.activeFilters={sort:'rating'};PM_SECTIONS.renderMainGrid();PM_SECTIONS.scrollToProductsIfNeeded()">Lihat Semua<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></button>
+  </div>
+  <div class="hscroll">
+    <div class="products-grid" id="products-trending" style="display:flex;flex-wrap:nowrap;gap:14px;min-width:max-content"></div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION: UMKM FAVORIT
+     ================================================================ -->
+<section class="section" aria-label="UMKM Favorit">
+  <div class="sec-head">
+    <div class="sec-title"><span class="sec-icon">🏪</span><h2>UMKM Favorit</h2><span class="sec-sub">Toko terpercaya di Purbalingga</span></div>
+  </div>
+  <div class="store-scroll" id="store-scroll"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-in">
+    <div>
+      <div class="foot-brand-name"><div class="foot-brand-ico">🏪</div>PURBALINGGA MART</div>
+      <p class="foot-desc">Platform marketplace produk lokal UMKM Purbalingga. Mendukung pengusaha lokal tumbuh dan berkembang bersama.</p>
+      <div class="socials">
+        <a href="#" class="soc-btn" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" class="soc-btn" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="#" class="soc-btn" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Marketplace</h4>
+      <a class="foot-link" onclick="PM_SECTIONS.setCategory('makanan')" href="#">Makanan &amp; Minuman</a>
+      <a class="foot-link" onclick="PM_SECTIONS.setCategory('kerajinan')" href="#">Kerajinan &amp; Kriya</a>
+      <a class="foot-link" onclick="PM_SECTIONS.setCategory('pertanian')" href="#">Pertanian &amp; Organik</a>
+      <a class="foot-link" onclick="PM_SECTIONS.setCategory('fashion')" href="#">Fashion &amp; Kecantikan</a>
+      <a class="foot-link" onclick="PM_SECTIONS.setCategory('minuman')" href="#">Kopi &amp; Minuman</a>
+    </div>
+    <div class="foot-col">
+      <h4>Informasi</h4>
+      <a href="register-store.html" class="foot-link">Daftar Toko UMKM</a>
+      <a href="login.html" class="foot-link">Login Seller</a>
+      <a href="#" class="foot-link" onclick="PM_AUTH.toast('Segera hadir!','info');return false">Tentang Kami</a>
+      <a href="#" class="foot-link" onclick="PM_AUTH.toast('Segera hadir!','info');return false">Cara Berjualan</a>
+      <a href="#" class="foot-link" onclick="PM_AUTH.toast('Segera hadir!','info');return false">Syarat &amp; Ketentuan</a>
+    </div>
+    <div class="foot-col">
+      <h4>Kontak Kami</h4>
+      <div class="foot-contact-row"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Jl. Letjen Suprapto No.1, Purbalingga</div>
+      <div class="foot-contact-row"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@purbalinggamart.id</div>
+      <div class="foot-contact-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>Senin – Sabtu, 08.00 – 17.00 WIB</div>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <div class="footer-bot-in">
+      <span>© 2025 <em>Purbalingga Mart</em>. Hak Cipta Dilindungi. Sistem Produk Dinamis.</span>
+      <div class="foot-bot-links">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat &amp; Ketentuan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Chatbot FAB -->
+<button class="chat-fab" id="chat-fab" aria-label="Buka chatbot">
+  <div class="chat-pulse"></div>
+  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+</button>
+<div class="chat-window" id="chat-window">
+  <div class="cw-head">
+    <div class="cw-av">🤖</div>
+    <div class="cw-info"><div class="cw-name">Mbak Mart</div><div class="cw-status">Online · Siap membantu</div></div>
+    <button class="cw-close" id="cw-close">✕</button>
+  </div>
+  <div class="cw-msgs" id="cw-msgs"></div>
+  <div class="cw-input">
+    <input type="text" id="cw-input" placeholder="Ketik pertanyaanmu..." autocomplete="off" />
+    <button class="cw-send" id="cw-send"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg></button>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+
+<!-- ================================================================
+     SCRIPTS — ORDER MATTERS
+     ================================================================ -->
+<script src="auth.js"></script>
+<script src="supabase-config.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/transaction.js"></script>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="script.js"></script>
+
+<!-- All homepage logic: script.js handles countdown, chatbot, store scroll, promo strip, back-to-top -->
+<a href="seller.html" class="seller-corner-btn">SELLER PANEL</a>
+</body>

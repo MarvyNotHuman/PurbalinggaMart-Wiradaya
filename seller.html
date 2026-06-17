@@ -1,0 +1,1839 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Panel — Purbalingga Mart</title>
+    <link rel="stylesheet" href="seller.css" />
+    <link rel="stylesheet" href="assets/css/products.css" />
+    <link rel="stylesheet" href="theme.css" />
+</head>
+  <body>
+    <div class="sb-overlay" id="sb-overlay"></div>
+
+    <div class="dash-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" role="navigation">
+        <div class="sb-brand">
+          <div class="sb-logo">🏪</div>
+          <div class="sb-brand-texts">
+            <div class="sb-brand-name">PURBALINGGA MART</div>
+            <div class="sb-brand-sub">Seller Center</div>
+          </div>
+        </div>
+
+        <div class="sb-store">
+          <img
+            class="sb-store-av-img"
+            src="https://picsum.photos/seed/seller1plg/80/80"
+            alt="Avatar"
+            style="
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              object-fit: cover;
+              border: 2px solid rgba(22, 163, 74, 0.5);
+              flex-shrink: 0;
+            "
+          />
+          <div style="min-width: 0">
+            <div
+              class="sb-store-name-text"
+              style="
+                font-size: 12.5px;
+                font-weight: 700;
+                color: rgba(255, 255, 255, 0.9);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              "
+            >
+              Toko Saya
+            </div>
+            <div class="sb-store-badge">● Aktif</div>
+          </div>
+        </div>
+
+        <nav class="sb-nav">
+          <div class="sb-section-label">Menu Utama</div>
+          <div class="sb-item active" data-section="dashboard">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+            <span>Dashboard</span>
+          </div>
+          <div class="sb-item" data-section="products">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
+              />
+              <polyline points="3.27,6.96 12,12.01 20.73,6.96" />
+              <line x1="12" y1="22.08" x2="12" y2="12" />
+            </svg>
+            <span>Produk Saya</span>
+            <span class="sb-badge" id="sb-product-count">0</span>
+          </div>
+          <div class="sb-item" data-section="add-product">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="16" />
+              <line x1="8" y1="12" x2="16" y2="12" />
+            </svg>
+            <span>Tambah Produk</span>
+          </div>
+          <div class="sb-section-label" style="margin-top: 8px">
+            Operasional
+          </div>
+          <div class="sb-item" data-section="orders">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 01-8 0" />
+            </svg>
+            <span>Pesanan</span>
+            <span class="sb-badge">3</span>
+          </div>
+          <div class="sb-item" data-section="stats">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+            <span>Statistik</span>
+          </div>
+          <div class="sb-section-label" style="margin-top: 8px">Akun</div>
+          <a href="profile.html" class="sb-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>Profil Saya</span>
+          </a>
+          <div class="sb-item" data-section="settings">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"
+              />
+            </svg>
+            <span>Pengaturan</span>
+          </div>
+          <a
+            href="index.html"
+            class="sb-item"
+            style="color: rgba(255, 255, 255, 0.45)"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <polyline points="9,22 9,12 15,12 15,22" />
+            </svg>
+            <span>Kembali ke Toko</span>
+          </a>
+          <div class="sb-item logout" onclick="PM_AUTH.logout()">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+              <polyline points="16,17 21,12 16,7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span>Keluar</span>
+          </div>
+        </nav>
+        <div class="sb-foot">
+          <div>v3.0 · <a href="index.html">Purbalingga Mart</a></div>
+        </div>
+      </aside>
+
+      <!-- MAIN AREA -->
+      <div class="main-area">
+        <!-- TOPBAR -->
+        <header class="topbar">
+          <button class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+          </button>
+          <span class="topbar-title" id="topbar-title">Dashboard</span>
+          <div class="topbar-search">
+            <input
+              type="search"
+              id="topbar-search-input"
+              placeholder="Cari produk saya..."
+              autocomplete="off"
+            />
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <div class="topbar-right">
+            <button
+              class="tb-icon-btn"
+              onclick="PM_AUTH.toast('Kamu punya 3 pesanan baru! 📦', 'info')"
+            >
+              <svg viewBox="0 0 24 24">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 01-3.46 0" />
+              </svg>
+              <div class="tb-notif-dot"></div>
+            </button>
+            <div class="tb-profile" onclick="navigate('settings')">
+              <img
+                class="tb-profile-img"
+                src="https://picsum.photos/seed/seller1plg/80/80"
+                alt="Avatar"
+              />
+              <span class="tb-profile-name tb-seller-name">Seller</span>
+              <svg viewBox="0 0 24 24">
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </div>
+          </div>
+        </header>
+
+        <!-- CONTENT -->
+        <main class="content" id="main-content">
+          <!-- ========== PAGE: DASHBOARD ========== -->
+          <section class="page active" id="page-dashboard">
+            <div class="page-header">
+              <div class="page-header-left">
+                <h1>Selamat Datang! 👋</h1>
+                <p>Ringkasan performa toko Anda</p>
+              </div>
+              <div class="page-header-right">
+                <button class="btn btn-outline" onclick="navigate('stats')">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                  Statistik
+                </button>
+                <button class="btn btn-solid" onclick="navigate('add-product')">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  Tambah Produk
+                </button>
+              </div>
+            </div>
+
+            <!-- Stat Cards — filled by JS -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Total Produk</div>
+                  <div class="stat-value" id="dash-total-products">0</div>
+                  <div class="stat-sub up">
+                    <svg viewBox="0 0 24 24">
+                      <polyline points="23,6 13.5,15.5 8.5,10.5 1,18" />
+                      <polyline points="17,6 23,6 23,12" /></svg
+                    >dari localStorage
+                  </div>
+                </div>
+                <div class="stat-icon ic-green">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Produk Aktif</div>
+                  <div class="stat-value" id="dash-active-products">0</div>
+                  <div class="stat-sub up">
+                    <svg viewBox="0 0 24 24">
+                      <polyline points="23,6 13.5,15.5 8.5,10.5 1,18" />
+                      <polyline points="17,6 23,6 23,12" /></svg
+                    >tampil di marketplace
+                  </div>
+                </div>
+                <div class="stat-icon ic-blue">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="20,6 9,17 4,12" />
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Total Terjual</div>
+                  <div class="stat-value" id="dash-total-sold">0</div>
+                  <div class="stat-sub up">
+                    <svg viewBox="0 0 24 24">
+                      <polyline points="23,6 13.5,15.5 8.5,10.5 1,18" />
+                      <polyline points="17,6 23,6 23,12" /></svg
+                    >+18% vs bulan lalu
+                  </div>
+                </div>
+                <div class="stat-icon ic-orange">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 01-8 0" />
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Est. Pendapatan</div>
+                  <div
+                    class="stat-value"
+                    id="dash-revenue"
+                    style="font-size: 17px"
+                  >
+                    Rp 0
+                  </div>
+                  <div class="stat-sub up">
+                    <svg viewBox="0 0 24 24">
+                      <polyline points="23,6 13.5,15.5 8.5,10.5 1,18" />
+                      <polyline points="17,6 23,6 23,12" /></svg
+                    >+24% vs bulan lalu
+                  </div>
+                </div>
+                <div class="stat-icon ic-purple">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-3-1">
+              <!-- Recent products -->
+              <div class="card">
+                <div class="card-head">
+                  <div>
+                    <h3>Produk Terbaru Saya</h3>
+                    <p>5 produk terakhir ditambahkan</p>
+                  </div>
+                  <button
+                    class="btn btn-outline btn-sm"
+                    onclick="navigate('products')"
+                  >
+                    Lihat Semua
+                  </button>
+                </div>
+                <div
+                  id="dash-recent-products"
+                  style="padding: 0 16px 16px"
+                ></div>
+              </div>
+
+              <!-- Quick actions -->
+              <div class="card">
+                <div class="card-head"><h3>Aksi Cepat</h3></div>
+                <div class="card-body" style="padding: 14px">
+                  <div class="quick-actions">
+                    <div class="qa-item" onclick="navigate('add-product')">
+                      <div class="qa-icon" style="background: var(--g-xlt)">
+                        ➕
+                      </div>
+                      <div class="qa-info">
+                        <div class="qa-title">Tambah Produk</div>
+                        <div class="qa-desc">Upload produk baru</div>
+                      </div>
+                      <div class="qa-arrow">
+                        <svg viewBox="0 0 24 24">
+                          <polyline points="9,18 15,12 9,6" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="qa-item" onclick="navigate('orders')">
+                      <div class="qa-icon" style="background: #eff6ff">📦</div>
+                      <div class="qa-info">
+                        <div class="qa-title">Pesanan Masuk</div>
+                        <div class="qa-desc">3 pesanan baru</div>
+                      </div>
+                      <div class="qa-arrow">
+                        <svg viewBox="0 0 24 24">
+                          <polyline points="9,18 15,12 9,6" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="qa-item" onclick="navigate('stats')">
+                      <div class="qa-icon" style="background: #fff7ed">📊</div>
+                      <div class="qa-info">
+                        <div class="qa-title">Lihat Statistik</div>
+                        <div class="qa-desc">Performa toko</div>
+                      </div>
+                      <div class="qa-arrow">
+                        <svg viewBox="0 0 24 24">
+                          <polyline points="9,18 15,12 9,6" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="qa-item" onclick="navigate('settings')">
+                      <div class="qa-icon" style="background: #f5f3ff">⚙️</div>
+                      <div class="qa-info">
+                        <div class="qa-title">Pengaturan Toko</div>
+                        <div class="qa-desc">Edit profil toko</div>
+                      </div>
+                      <div class="qa-arrow">
+                        <svg viewBox="0 0 24 24">
+                          <polyline points="9,18 15,12 9,6" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========== PAGE: PRODUCTS ========== -->
+          <section class="page" id="page-products">
+            <div class="page-header">
+              <div class="page-header-left">
+                <h1>Produk Saya</h1>
+                <p>
+                  Kelola semua produk yang Anda jual — data dari localStorage
+                </p>
+              </div>
+              <div class="page-header-right">
+                <button class="btn btn-outline" onclick="exportMyProducts()">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="7,10 12,15 17,10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Export CSV
+                </button>
+                <button class="btn btn-solid" onclick="navigate('add-product')">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  Tambah Produk
+                </button>
+              </div>
+            </div>
+
+            <!-- Search + filter bar -->
+            <div class="card" style="padding: 16px 18px; margin-bottom: 14px">
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  flex-wrap: wrap;
+                  align-items: center;
+                "
+              >
+                <div class="table-search" style="flex: 1; min-width: 200px">
+                  <input
+                    type="search"
+                    id="prod-search"
+                    placeholder="Cari nama produk..."
+                    autocomplete="off"
+                    oninput="filterMyProducts()"
+                  />
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                </div>
+                <select
+                  class="table-filter-sel"
+                  id="prod-cat-filter"
+                  onchange="filterMyProducts()"
+                >
+                  <option value="">Semua Kategori</option>
+                  <option value="makanan">🍱 Makanan</option>
+                  <option value="minuman">☕ Minuman</option>
+                  <option value="kerajinan">🧶 Kerajinan</option>
+                  <option value="pertanian">🌾 Pertanian</option>
+                  <option value="fashion">👗 Fashion</option>
+                </select>
+                <select
+                  class="table-filter-sel"
+                  id="prod-status-filter"
+                  onchange="filterMyProducts()"
+                >
+                  <option value="">Semua Status</option>
+                  <option value="active">Aktif</option>
+                  <option value="suspended">Suspended</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Products table — filled by JS -->
+            <div class="card">
+              <div id="seller-products-list" style="padding: 8px 0">
+                <div class="pm-empty-state" style="padding: 48px 20px">
+                  <div class="pm-empty-icon">📦</div>
+                  <div class="pm-empty-title">Memuat produk...</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========== PAGE: ADD / EDIT PRODUCT ========== -->
+          <section class="page" id="page-add-product">
+            <div class="page-header">
+              <div class="page-header-left">
+                <h1 id="add-product-heading">Tambah Produk Baru</h1>
+                <p>Isi detail produk yang ingin Anda jual</p>
+              </div>
+              <div class="page-header-right">
+                <button
+                  class="btn btn-outline"
+                  id="cancel-product-btn"
+                  onclick="navigate('products')"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                  Batal
+                </button>
+                <button class="btn btn-solid" id="save-product-btn">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+                    />
+                    <polyline points="17,21 17,13 7,13 7,21" />
+                    <polyline points="7,3 7,8 15,8" />
+                  </svg>
+                  Simpan Produk
+                </button>
+              </div>
+            </div>
+
+            <form id="add-product-form" onsubmit="return false;">
+              <div class="grid-2" style="margin-bottom: 0">
+                <!-- LEFT -->
+                <div style="display: flex; flex-direction: column; gap: 18px">
+                  <div class="card">
+                    <div class="card-head"><h3>📋 Informasi Produk</h3></div>
+                    <div
+                      class="card-body"
+                      style="display: flex; flex-direction: column; gap: 14px"
+                    >
+                      <div class="form-group">
+                        <label class="form-label" for="prod-name"
+                          >Nama Produk <span class="req">*</span></label
+                        >
+                        <input
+                          class="form-input"
+                          type="text"
+                          id="prod-name"
+                          placeholder="Contoh: Nopia Asli Pak Slamet"
+                          maxlength="100"
+                        />
+                      </div>
+
+                      <div class="form-grid">
+                        <div class="form-group">
+                          <label class="form-label" for="prod-category"
+                            >Kategori <span class="req">*</span></label
+                          >
+                          <select class="form-select" id="prod-category">
+                            <option value="">-- Pilih Kategori --</option>
+                            <option value="makanan">🍱 Makanan</option>
+                            <option value="minuman">☕ Minuman</option>
+                            <option value="kerajinan">🧶 Kerajinan</option>
+                            <option value="pertanian">🌾 Pertanian</option>
+                            <option value="fashion">👗 Fashion</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="prod-badge"
+                            >Label / Badge</label
+                          >
+                          <select class="form-select" id="prod-badge">
+                            <option value="">-- Tanpa Label --</option>
+                            <option value="BEST SELLER">🏆 Best Seller</option>
+                            <option value="PROMO">🔴 Promo</option>
+                            <option value="TRENDING">🔥 Trending</option>
+                            <option value="BARU">✨ Baru</option>
+                            <option value="HOT">🔥 Hot</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label" for="prod-durability"
+                          >Jenis Produk <span class="req">*</span></label
+                        >
+                        <select class="form-select" id="prod-durability">
+                          <option value="tahan-lama">
+                            📦 Tahan Lama (bisa dikirim reguler/ekspres)
+                          </option>
+                          <option value="cepat-basi">
+                            🌿 Cepat Basi / Mudah Rusak (kirim/ambil hari yang
+                            sama)
+                          </option>
+                        </select>
+                        <div class="form-hint">
+                          Produk cepat basi (mis. mendoan, getuk, makanan basah)
+                          hanya bisa diambil sendiri atau diantar seller pada
+                          hari yang sama agar tetap segar.
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label" for="prod-location"
+                          >Lokasi Toko</label
+                        >
+                        <select class="form-select" id="prod-location">
+                          <option value="Purbalingga Kota">
+                            Purbalingga Kota
+                          </option>
+                          <option value="Bojongsari">Bojongsari</option>
+                          <option value="Kertanegara">Kertanegara</option>
+                          <option value="Bukateja">Bukateja</option>
+                          <option value="Mrebet">Mrebet</option>
+                          <option value="Karangreja">Karangreja</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label" for="prod-desc"
+                          >Deskripsi Produk</label
+                        >
+                        <textarea
+                          class="form-textarea"
+                          id="prod-desc"
+                          rows="4"
+                          placeholder="Jelaskan detail produk Anda: bahan, keunggulan, cara penggunaan, dll."
+                        ></textarea>
+                        <div class="form-hint">
+                          Deskripsi lengkap meningkatkan kepercayaan pembeli
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label">Promo Aktif?</label>
+                        <div
+                          style="
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 12px;
+                            background: var(--bg);
+                            border-radius: var(--r);
+                            border: 1.5px solid var(--brd);
+                          "
+                        >
+                          <label class="toggle">
+                            <input type="checkbox" id="prod-promo" />
+                            <span class="toggle-slider"></span>
+                          </label>
+                          <div>
+                            <div
+                              style="
+                                font-size: 13px;
+                                font-weight: 600;
+                                color: var(--txt);
+                              "
+                            >
+                              Tandai sebagai Promo
+                            </div>
+                            <div style="font-size: 11.5px; color: var(--txt-m)">
+                              Produk akan muncul di seksi "Promo Hari Ini"
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Price & Stock -->
+                  <div class="card">
+                    <div class="card-head"><h3>💰 Harga &amp; Stok</h3></div>
+                    <div
+                      class="card-body"
+                      style="display: flex; flex-direction: column; gap: 14px"
+                    >
+                      <div class="form-group">
+                        <label class="form-label" for="prod-price"
+                          >Harga Jual <span class="req">*</span></label
+                        >
+                        <div class="input-group">
+                          <span class="input-prefix">Rp</span>
+                          <input
+                            class="form-input"
+                            type="number"
+                            id="prod-price"
+                            placeholder="15000"
+                            min="0"
+                            step="500"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-grid">
+                        <div class="form-group">
+                          <label class="form-label" for="prod-orig-price"
+                            >Harga Coret (Asli)</label
+                          >
+                          <div class="input-group">
+                            <span class="input-prefix">Rp</span>
+                            <input
+                              class="form-input"
+                              type="number"
+                              id="prod-orig-price"
+                              placeholder="20000"
+                              min="0"
+                              step="500"
+                            />
+                          </div>
+                          <div class="form-hint">Isi jika ada diskon</div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label" for="prod-stock"
+                            >Jumlah Stok <span class="req">*</span></label
+                          >
+                          <div class="input-group">
+                            <input
+                              class="form-input"
+                              type="number"
+                              id="prod-stock"
+                              placeholder="50"
+                              min="0"
+                            />
+                            <span class="input-suffix">pcs</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- RIGHT: Image -->
+                <div style="display: flex; flex-direction: column; gap: 18px">
+                  <div class="card">
+                    <div class="card-head">
+                      <div>
+                        <h3>🖼️ Foto Produk</h3>
+                        <p>Foto berkualitas tinggi meningkatkan penjualan</p>
+                      </div>
+                    </div>
+                    <div
+                      class="card-body"
+                      style="display: flex; flex-direction: column; gap: 14px"
+                    >
+                      <!-- File upload -->
+                      <div
+                        class="img-upload-zone"
+                        onclick="
+                          document.getElementById('prod-image-file').click()
+                        "
+                      >
+                        <input
+                          type="file"
+                          id="prod-image-file"
+                          accept="image/*"
+                          style="display: none"
+                        />
+                        <input type="hidden" id="prod-image-b64" />
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">
+                          Klik untuk pilih file gambar
+                        </div>
+                        <div class="upload-sub">PNG, JPG, WEBP · Maks 2MB</div>
+                      </div>
+
+                      <!-- Preview -->
+                      <img
+                        id="image-preview"
+                        class="ap-img-preview"
+                        alt="Preview produk"
+                        style="
+                          display: none;
+                          max-width: 100%;
+                          max-height: 200px;
+                          border-radius: 10px;
+                          object-fit: cover;
+                        "
+                      />
+
+                      <div
+                        style="display: flex; align-items: center; gap: 10px"
+                      >
+                        <div
+                          style="flex: 1; height: 1px; background: var(--brd)"
+                        ></div>
+                        <span
+                          style="
+                            font-size: 12px;
+                            color: var(--txt-lt);
+                            font-weight: 500;
+                          "
+                          >atau URL gambar</span
+                        >
+                        <div
+                          style="flex: 1; height: 1px; background: var(--brd)"
+                        ></div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label" for="prod-image-url"
+                          >URL Gambar</label
+                        >
+                        <div style="display: flex; gap: 8px">
+                          <input
+                            class="form-input"
+                            type="url"
+                            id="prod-image-url"
+                            style="flex: 1"
+                            placeholder="https://picsum.photos/seed/produk/400/300"
+                          />
+                          <button
+                            type="button"
+                            class="btn btn-outline btn-sm"
+                            onclick="previewFromUrl()"
+                          >
+                            Preview
+                          </button>
+                        </div>
+                        <div class="form-hint">
+                          Biarkan kosong untuk menggunakan placeholder otomatis
+                        </div>
+                      </div>
+
+                      <!-- Quick placeholders -->
+                      <div>
+                        <div
+                          style="
+                            font-size: 11.5px;
+                            font-weight: 600;
+                            color: var(--txt-m);
+                            margin-bottom: 8px;
+                          "
+                        >
+                          Placeholder cepat:
+                        </div>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap">
+                          <button
+                            type="button"
+                            class="btn btn-outline btn-sm"
+                            onclick="setPlaceholder('makanan')"
+                          >
+                            🍱 Makanan
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline btn-sm"
+                            onclick="setPlaceholder('kerajinan')"
+                          >
+                            🧶 Kerajinan
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline btn-sm"
+                            onclick="setPlaceholder('pertanian')"
+                          >
+                            🌾 Pertanian
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-outline btn-sm"
+                            onclick="setPlaceholder('fashion')"
+                          >
+                            👗 Fashion
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tips -->
+                  <div
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--g-xlt),
+                        #d1fae5
+                      );
+                      border: 1.5px solid var(--g-lt);
+                      border-radius: var(--r-md);
+                      padding: 18px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-size: 13.5px;
+                        font-weight: 700;
+                        color: var(--g-dk);
+                        margin-bottom: 10px;
+                      "
+                    >
+                      💡 Tips Berjualan
+                    </div>
+                    <ul
+                      style="
+                        display: flex;
+                        flex-direction: column;
+                        gap: 7px;
+                        padding-left: 0;
+                        list-style: none;
+                      "
+                    >
+                      <li
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          font-size: 12.5px;
+                          color: var(--g-dk);
+                        "
+                      >
+                        <span>✓</span>Gunakan foto produk asli yang jelas
+                      </li>
+                      <li
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          font-size: 12.5px;
+                          color: var(--g-dk);
+                        "
+                      >
+                        <span>✓</span>Tulis deskripsi lengkap dan menarik
+                      </li>
+                      <li
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          font-size: 12.5px;
+                          color: var(--g-dk);
+                        "
+                      >
+                        <span>✓</span>Harga kompetitif sesuai pasar lokal
+                      </li>
+                      <li
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          font-size: 12.5px;
+                          color: var(--g-dk);
+                        "
+                      >
+                        <span>✓</span>Aktifkan promo untuk menarik lebih banyak
+                        pembeli
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <!-- ========== PAGE: ORDERS ========== -->
+          <section class="page" id="page-orders">
+            <div class="page-header">
+              <div class="page-header-left">
+                <h1>Pesanan Masuk</h1>
+                <p>
+                  Kelola pesanan dari pembeli — data realtime dari localStorage
+                </p>
+              </div>
+              <div class="page-header-right">
+                <a href="orders.html" class="btn btn-outline" target="_blank">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    width="16"
+                    height="16"
+                  >
+                    <path
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"
+                    />
+                    <rect x="9" y="3" width="6" height="4" rx="2" />
+                  </svg>
+                  Buka Halaman Pesanan
+                </a>
+              </div>
+            </div>
+            <!-- Stats row -->
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 12px;
+                margin-bottom: 18px;
+              "
+            >
+              <div class="card" style="padding: 14px 16px; text-align: center">
+                <div
+                  style="font-size: 22px; font-weight: 900; color: var(--g)"
+                  id="seller-ord-total"
+                >
+                  0
+                </div>
+                <div
+                  style="
+                    font-size: 11.5px;
+                    color: var(--txt-m);
+                    font-weight: 600;
+                  "
+                >
+                  Total
+                </div>
+              </div>
+              <div class="card" style="padding: 14px 16px; text-align: center">
+                <div
+                  style="font-size: 22px; font-weight: 900; color: var(--or)"
+                  id="seller-ord-pending"
+                >
+                  0
+                </div>
+                <div
+                  style="
+                    font-size: 11.5px;
+                    color: var(--txt-m);
+                    font-weight: 600;
+                  "
+                >
+                  Menunggu
+                </div>
+              </div>
+              <div class="card" style="padding: 14px 16px; text-align: center">
+                <div
+                  style="font-size: 22px; font-weight: 900; color: var(--bl)"
+                  id="seller-ord-process"
+                >
+                  0
+                </div>
+                <div
+                  style="
+                    font-size: 11.5px;
+                    color: var(--txt-m);
+                    font-weight: 600;
+                  "
+                >
+                  Diproses
+                </div>
+              </div>
+              <div class="card" style="padding: 14px 16px; text-align: center">
+                <div
+                  style="font-size: 22px; font-weight: 900; color: var(--g)"
+                  id="seller-ord-done"
+                >
+                  0
+                </div>
+                <div
+                  style="
+                    font-size: 11.5px;
+                    color: var(--txt-m);
+                    font-weight: 600;
+                  "
+                >
+                  Selesai
+                </div>
+              </div>
+            </div>
+            <!-- Filter tabs -->
+            <div
+              style="
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+                margin-bottom: 14px;
+              "
+            >
+              <button
+                class="btn btn-solid btn-sm seller-ord-filter active"
+                data-f="all"
+              >
+                Semua
+              </button>
+              <button
+                class="btn btn-outline btn-sm seller-ord-filter"
+                data-f="pending"
+              >
+                ⏳ Menunggu
+              </button>
+              <button
+                class="btn btn-outline btn-sm seller-ord-filter"
+                data-f="diproses"
+              >
+                🔄 Diproses
+              </button>
+              <button
+                class="btn btn-outline btn-sm seller-ord-filter"
+                data-f="dikirim"
+              >
+                🚚 Dikirim
+              </button>
+              <button
+                class="btn btn-outline btn-sm seller-ord-filter"
+                data-f="selesai"
+              >
+                ✅ Selesai
+              </button>
+            </div>
+            <div
+              id="orders-list"
+              style="display: flex; flex-direction: column; gap: 12px"
+            >
+              <div
+                style="
+                  padding: 40px;
+                  text-align: center;
+                  color: #94a3b8;
+                  font-size: 13.5px;
+                "
+              >
+                <div style="font-size: 32px; margin-bottom: 8px">📦</div>
+                Memuat pesanan...
+              </div>
+            </div>
+          </section>
+
+          <!-- ========== PAGE: STATS ========== -->
+          <section class="page" id="page-stats">
+            <div class="page-header">
+              <div class="page-header-left">
+                <h1>Statistik Toko</h1>
+                <p>Analisis performa penjualan dari data nyata</p>
+              </div>
+            </div>
+            <div class="stats-grid" style="margin-bottom: 24px">
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Total Produk</div>
+                  <div class="stat-value" id="adm-total-products-stat">-</div>
+                </div>
+                <div class="stat-icon ic-green">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Total Terjual</div>
+                  <div class="stat-value" id="adm-total-sold-stat">-</div>
+                </div>
+                <div class="stat-icon ic-blue">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="20,6 9,17 4,12" />
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Rating Rata-rata</div>
+                  <div
+                    class="stat-value"
+                    id="adm-avg-rating-stat"
+                    style="color: var(--yl)"
+                  >
+                    -
+                  </div>
+                </div>
+                <div class="stat-icon ic-orange">
+                  <svg viewBox="0 0 24 24">
+                    <polygon
+                      points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-card-left">
+                  <div class="stat-label">Est. Pendapatan</div>
+                  <div
+                    class="stat-value"
+                    id="adm-revenue-stat"
+                    style="font-size: 17px"
+                  >
+                    -
+                  </div>
+                </div>
+                <div class="stat-icon ic-purple">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top products table from DB -->
+            <div class="card">
+              <div class="card-head">
+                <h3>🏆 Produk Terlaris Saya</h3>
+                <p>Berdasarkan jumlah penjualan</p>
+              </div>
+              <div id="stats-top-products" style="padding: 0 0 8px"></div>
+            </div>
+
+            <!-- Category breakdown -->
+            <div class="card" style="margin-top: 18px">
+              <div class="card-head"><h3>🗂️ Produk per Kategori</h3></div>
+              <div
+                class="card-body"
+                id="adm-cat-breakdown"
+                style="padding: 16px"
+              ></div>
+            </div>
+          </section>
+
+          <!-- ========== PAGE: SETTINGS ========== -->
+          <section class="page" id="page-settings">
+            <div class="page-header">
+              <div class="page-header-left">
+                <h1>Pengaturan Toko</h1>
+                <p>Kelola informasi toko Anda</p>
+              </div>
+              <div class="page-header-right">
+                <button class="btn btn-solid" onclick="saveSettings()">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+                    />
+                    <polyline points="17,21 17,13 7,13 7,21" />
+                    <polyline points="7,3 7,8 15,8" />
+                  </svg>
+                  Simpan
+                </button>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="card settings-section">
+                <div class="card-head"><h3>🏪 Profil Toko</h3></div>
+                <div
+                  class="card-body"
+                  style="display: flex; flex-direction: column; gap: 14px"
+                >
+                  <div class="form-group">
+                    <label class="form-label">Nama Toko</label
+                    ><input
+                      class="form-input"
+                      type="text"
+                      id="setting-store-name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Nama Pemilik</label
+                    ><input
+                      class="form-input"
+                      type="text"
+                      id="setting-owner-name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Lokasi Toko</label>
+                    <select class="form-select" id="setting-location">
+                      <option>Purbalingga Kota</option>
+                      <option>Bojongsari</option>
+                      <option>Kertanegara</option>
+                      <option>Bukateja</option>
+                      <option>Mrebet</option>
+                      <option>Karangreja</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Deskripsi Toko</label>
+                    <textarea
+                      class="form-textarea"
+                      rows="3"
+                      id="setting-store-desc"
+                      placeholder="Ceritakan tentang toko Anda..."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 18px">
+                <div class="card settings-section">
+                  <div class="card-head"><h3>👤 Informasi Akun</h3></div>
+                  <div
+                    class="card-body"
+                    style="display: flex; flex-direction: column; gap: 14px"
+                  >
+                    <div class="form-group">
+                      <label class="form-label">Email</label
+                      ><input
+                        class="form-input"
+                        type="email"
+                        id="setting-email"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Nomor WhatsApp</label>
+                      <div class="input-group">
+                        <span class="input-prefix">+62</span
+                        ><input
+                          class="form-input"
+                          type="tel"
+                          id="setting-phone"
+                          placeholder="812-3456-7890"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card settings-section">
+                  <div class="card-head"><h3>🔔 Notifikasi</h3></div>
+                  <div
+                    class="card-body"
+                    style="display: flex; flex-direction: column; gap: 0"
+                  >
+                    <div class="setting-row">
+                      <div class="setting-info">
+                        <h4>Pesanan Baru</h4>
+                        <p>Notifikasi saat ada pesanan masuk</p>
+                      </div>
+                      <label class="toggle"
+                        ><input type="checkbox" checked /><span
+                          class="toggle-slider"
+                        ></span
+                      ></label>
+                    </div>
+                    <div class="setting-row">
+                      <div class="setting-info">
+                        <h4>Stok Menipis</h4>
+                        <p>Peringatan saat stok &lt; 10</p>
+                      </div>
+                      <label class="toggle"
+                        ><input type="checkbox" checked /><span
+                          class="toggle-slider"
+                        ></span
+                      ></label>
+                    </div>
+                    <div class="setting-row" style="border-bottom: none">
+                      <div class="setting-info">
+                        <h4>Promo Marketplace</h4>
+                        <p>Info promo dan event</p>
+                      </div>
+                      <label class="toggle"
+                        ><input type="checkbox" checked /><span
+                          class="toggle-slider"
+                        ></span
+                      ></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+
+    <!-- SCRIPTS — order critical -->
+    <script src="auth.js"></script>
+    <script src="supabase-config.js"></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/transaction.js"></script>
+    <script src="assets/js/seller.js"></script>
+
+    <!-- Patch seller.js untuk upload foto ke Supabase -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Tambah tombol upload QRIS di sidebar/dashboard seller
+        const dash =
+          document.querySelector(".page#page-dashboard .card") ||
+          document.querySelector(".page");
+        if (dash) {
+          const qrisBanner = document.createElement("div");
+          qrisBanner.style.cssText =
+            "background:#f0fdf4;border:1.5px solid #16a34a;border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;gap:14px";
+          qrisBanner.innerHTML = `
+      <div style="font-size:28px">📱</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:800;color:#15803d;margin-bottom:3px">QRIS Toko Kamu</div>
+        <div style="font-size:12px;color:#166534">Upload foto QRIS agar pembeli bisa scan langsung di checkout</div>
+      </div>
+      <label style="background:#16a34a;color:#fff;padding:8px 14px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer">
+        📸 Upload QRIS
+        <input type="file" accept="image/*" style="display:none" onchange="PM_SELLER_EXT.uploadQRIS(this.files[0])">
+      </label>`;
+          dash.insertBefore(qrisBanner, dash.firstChild);
+        }
+
+        // Patch saveProduct untuk upload foto ke Supabase Storage
+        const origSave = document.getElementById("save-product-btn");
+        if (origSave) {
+          origSave.addEventListener(
+            "click",
+            async function patchUpload() {
+              const fileInput = document.getElementById("prod-image-file");
+              const file = fileInput?.files[0];
+              const nameInput = document.getElementById("prod-name");
+
+              if (file) {
+                try {
+                  const url = await PM_UPLOAD.uploadProductImage(
+                    file,
+                    nameInput?.value,
+                  );
+                  // Taruh URL ke field b64 supaya seller.js pakai ini
+                  const b64 = document.getElementById("prod-image-b64");
+                  if (b64 && url) b64.value = url;
+                  PM_AUTH.toast("✅ Foto produk berhasil diupload!", "ok");
+                } catch (e) {
+                  PM_AUTH.toast(
+                    "⚠️ Upload gagal, pakai URL lokal: " + e.message,
+                    "warn",
+                  );
+                }
+              }
+            },
+            true,
+          ); // capture: true, jalan sebelum seller.js listener
+        }
+      });
+
+      const PM_SELLER_EXT = {
+        async uploadQRIS(file) {
+          if (!file) return;
+          PM_AUTH.toast("⏳ Mengupload QRIS...", "info", 5000);
+          try {
+            const url = await PM_QRIS.uploadQRIS(file);
+            PM_AUTH.toast(
+              "✅ QRIS berhasil diupload! Akan tampil di checkout.",
+              "ok",
+            );
+          } catch (e) {
+            PM_AUTH.toast("❌ Gagal upload QRIS: " + e.message, "err");
+          }
+        },
+      };
+      window.PM_SELLER_EXT = PM_SELLER_EXT;
+    </script>
+
+    <script>
+      /* ── Seller panel navigation ─────────────────────────── */
+      function navigate(section) {
+        // Update sidebar active
+        document
+          .querySelectorAll(".sb-item")
+          .forEach((el) =>
+            el.classList.toggle("active", el.dataset.section === section),
+          );
+        // Update pages
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        const page = document.getElementById("page-" + section);
+        if (page) page.classList.add("active");
+        // Update topbar title
+        const titles = {
+          dashboard: "Dashboard",
+          products: "Produk Saya",
+          "add-product": "Tambah Produk",
+          orders: "Pesanan",
+          stats: "Statistik",
+          settings: "Pengaturan",
+        };
+        const ttEl = document.getElementById("topbar-title");
+        if (ttEl) ttEl.textContent = titles[section] || section;
+        // Refresh data when switching sections
+        if (section === "stats") renderSellerStats?.();
+        if (section === "settings") fillSettings?.();
+        if (section === "orders") {
+          const af =
+            document.querySelector(".seller-ord-filter.active")?.dataset.f ||
+            "all";
+          typeof renderSellerOrders === "function" && renderSellerOrders(af);
+        }
+      }
+
+      /* ── Hamburger ───────────────────────────────────────── */
+      document.getElementById("hamburger")?.addEventListener("click", () => {
+        document.querySelector(".sidebar")?.classList.toggle("mobile-open");
+        document.getElementById("sb-overlay")?.classList.toggle("show");
+      });
+      document.getElementById("sb-overlay")?.addEventListener("click", () => {
+        document.querySelector(".sidebar")?.classList.remove("mobile-open");
+        document.getElementById("sb-overlay")?.classList.remove("show");
+      });
+      document.querySelectorAll(".sb-item").forEach((el) => {
+        if (el.dataset.section)
+          el.addEventListener("click", () => {
+            navigate(el.dataset.section);
+            document.querySelector(".sidebar")?.classList.remove("mobile-open");
+            document.getElementById("sb-overlay")?.classList.remove("show");
+          });
+      });
+
+      /* ── Image helpers ───────────────────────────────────── */
+      function setPlaceholder(type) {
+        const seeds = {
+          makanan: "foodlocal",
+          kerajinan: "craftwork",
+          pertanian: "farmland",
+          fashion: "fashionwear",
+          minuman: "coffeedrink",
+        };
+        const url = `https://picsum.photos/seed/${seeds[type] || type}/400/300`;
+        const inp = document.getElementById("prod-image-url");
+        const pre = document.getElementById("image-preview");
+        if (inp) inp.value = url;
+        if (pre) {
+          pre.src = url;
+          pre.style.display = "block";
+        }
+        document.getElementById("prod-image-b64").value = "";
+      }
+
+      function previewFromUrl() {
+        const url = document.getElementById("prod-image-url")?.value.trim();
+        const pre = document.getElementById("image-preview");
+        if (!url || !pre) return;
+        pre.src = url;
+        pre.style.display = "block";
+        document.getElementById("prod-image-b64").value = "";
+      }
+
+      /* ── Filter my products in table ─────────────────────── */
+      function filterMyProducts() {
+        const q =
+          document.getElementById("prod-search")?.value.toLowerCase() || "";
+        const cat = document.getElementById("prod-cat-filter")?.value || "";
+        const status =
+          document.getElementById("prod-status-filter")?.value || "";
+        const user = PM_AUTH.getCurrentUser();
+        if (!user) return;
+        let products = PM_DB.getProductsBySeller(user.username || user.storeId);
+        if (q)
+          products = products.filter((p) => p.name.toLowerCase().includes(q));
+        if (cat) products = products.filter((p) => p.category === cat);
+        if (status) products = products.filter((p) => p.status === status);
+        PM_SELLER.renderMyProducts(products);
+      }
+
+      /* ── Export CSV ──────────────────────────────────────── */
+      function exportMyProducts() {
+        const user = PM_AUTH.getCurrentUser();
+        if (!user) return;
+        const products = PM_DB.getProductsBySeller(
+          user.username || user.storeId,
+        );
+        const headers = [
+          "ID",
+          "Nama",
+          "Kategori",
+          "Harga",
+          "Stok",
+          "Terjual",
+          "Status",
+        ];
+        const rows = products.map((p) =>
+          [
+            p.id,
+            `"${p.name}"`,
+            p.category,
+            p.price,
+            p.stock,
+            p.sold,
+            p.status,
+          ].join(","),
+        );
+        const csv = [headers.join(","), ...rows].join("\n");
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+        a.download = "produk-toko.csv";
+        a.click();
+        PM_AUTH.toast("✅ Data berhasil diexport!", "ok");
+      }
+
+      /* ── Render stats page ────────────────────────────────── */
+      function renderSellerStats() {
+        const user = PM_AUTH.getCurrentUser();
+        if (!user) return;
+        const products = PM_DB.getProductsBySeller(
+          user.username || user.storeId,
+        );
+        const fmt = (n) => "Rp " + Number(n).toLocaleString("id-ID");
+        const totalSold = products.reduce((s, p) => s + (p.sold || 0), 0);
+        const revenue = products.reduce(
+          (s, p) => s + (p.sold || 0) * p.price,
+          0,
+        );
+        const avgRating = products.length
+          ? (
+              products.reduce((s, p) => s + (p.rating || 0), 0) /
+              products.length
+            ).toFixed(1)
+          : "-";
+        document.getElementById("adm-total-products-stat") &&
+          (document.getElementById("adm-total-products-stat").textContent =
+            products.length);
+        document.getElementById("adm-total-sold-stat") &&
+          (document.getElementById("adm-total-sold-stat").textContent =
+            totalSold);
+        document.getElementById("adm-avg-rating-stat") &&
+          (document.getElementById("adm-avg-rating-stat").textContent =
+            avgRating + " ⭐");
+        document.getElementById("adm-revenue-stat") &&
+          (document.getElementById("adm-revenue-stat").textContent =
+            fmt(revenue));
+
+        // Top products
+        const topEl = document.getElementById("stats-top-products");
+        if (topEl) {
+          const sorted = [...products]
+            .sort((a, b) => b.sold - a.sold)
+            .slice(0, 6);
+          topEl.innerHTML = `<div style="overflow-x:auto"><table class="sp-table"><thead><tr><th>#</th><th>Produk</th><th>Harga</th><th>Terjual</th><th>Est. Pendapatan</th></tr></thead><tbody>${sorted
+            .map(
+              (p, i) =>
+                `<tr><td style="font-weight:700">${i + 1}</td><td style="font-weight:600">${p.name}</td><td>${fmt(p.price)}</td><td style="font-weight:700">${p.sold}</td><td style="color:var(--g);font-weight:700">${fmt(p.sold * p.price)}</td></tr>`,
+            )
+            .join("")}</tbody></table></div>`;
+        }
+
+        // Category breakdown
+        const catEl = document.getElementById("adm-cat-breakdown");
+        if (catEl && products.length) {
+          const cats = {};
+          products.forEach((p) => {
+            cats[p.category] = (cats[p.category] || 0) + 1;
+          });
+          catEl.innerHTML = Object.entries(cats)
+            .sort((a, b) => b[1] - a[1])
+            .map(
+              ([c, n]) => `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span style="font-size:13px;color:#1e293b;min-width:100px;text-transform:capitalize">${c}</span>
+        <div style="flex:1;background:#f1f5f9;border-radius:4px;height:8px;overflow:hidden">
+          <div style="width:${Math.round((n / products.length) * 100)}%;height:100%;background:#16a34a;border-radius:4px"></div>
+        </div>
+        <span style="font-size:12px;color:#64748b;min-width:20px">${n}</span>
+      </div>`,
+            )
+            .join("");
+        }
+      }
+
+      /* ── Fill settings from user data ───────────────────── */
+      function fillSettings() {
+        const user = PM_AUTH.getCurrentUser();
+        if (!user) return;
+        document.getElementById("setting-store-name") &&
+          (document.getElementById("setting-store-name").value =
+            user.storeName || "");
+        document.getElementById("setting-owner-name") &&
+          (document.getElementById("setting-owner-name").value =
+            user.name || "");
+        document.getElementById("setting-email") &&
+          (document.getElementById("setting-email").value = user.email || "");
+        const locSel = document.getElementById("setting-location");
+        if (locSel && user.location) {
+          [...locSel.options].forEach((o) => {
+            if (o.value === user.location) o.selected = true;
+          });
+        }
+      }
+
+      function saveSettings() {
+        PM_AUTH.toast("✅ Pengaturan berhasil disimpan!", "ok");
+      }
+
+      /* ── Update sidebar product count ────────────────────── */
+      function updateSbCount() {
+        const user = PM_AUTH.getCurrentUser();
+        if (!user) return;
+        const cnt = PM_DB.getProductsBySeller(
+          user.username || user.storeId,
+        ).length;
+        const el = document.getElementById("sb-product-count");
+        if (el) el.textContent = cnt;
+      }
+
+      /* ── PM_SELLER.renderMyProducts with optional override ── */
+      const _origRenderMyProducts = PM_SELLER.renderMyProducts;
+      PM_SELLER.renderMyProducts = function (products) {
+        if (products) {
+          // Render with filtered list
+          const el = document.getElementById("seller-products-list");
+          if (!el) return;
+          if (!products.length) {
+            el.innerHTML = `<div class="pm-empty-state" style="padding:48px 20px"><div class="pm-empty-icon">🔍</div><div class="pm-empty-title">Tidak Ada Produk</div><div class="pm-empty-desc">Coba ubah filter pencarian.</div></div>`;
+            return;
+          }
+          // reuse table render from seller.js by calling without args
+          _origRenderMyProducts.call(this);
+        } else {
+          _origRenderMyProducts.call(this);
+          updateSbCount();
+        }
+      };
+
+      /* ── Init extras after DOMContentLoaded ─────────────── */
+      document.addEventListener("DOMContentLoaded", () => {
+        updateSbCount();
+        fillSettings();
+        // Topbar search
+        document
+          .getElementById("topbar-search-input")
+          ?.addEventListener("input", function () {
+            const active = document.querySelector(".page.active");
+            if (active?.id === "page-products") {
+              document.getElementById("prod-search").value = this.value;
+              filterMyProducts();
+            }
+          });
+
+        /* ── Seller orders dynamic rendering ───────────────────── */
+        function renderSellerOrders(filterStatus) {
+          const user = PM_AUTH.getCurrentUser();
+          if (!user) return;
+          const txns = PM_TX.getBySeller(user.username);
+          const filtered =
+            filterStatus && filterStatus !== "all"
+              ? txns.filter((t) => t.status === filterStatus)
+              : txns;
+
+          // Update stats
+          const byStatus = {};
+          txns.forEach((t) => {
+            byStatus[t.status] = (byStatus[t.status] || 0) + 1;
+          });
+          document.getElementById("seller-ord-total") &&
+            (document.getElementById("seller-ord-total").textContent =
+              txns.length);
+          document.getElementById("seller-ord-pending") &&
+            (document.getElementById("seller-ord-pending").textContent =
+              byStatus.pending || 0);
+          document.getElementById("seller-ord-process") &&
+            (document.getElementById("seller-ord-process").textContent =
+              (byStatus.diproses || 0) + (byStatus.dikirim || 0));
+          document.getElementById("seller-ord-done") &&
+            (document.getElementById("seller-ord-done").textContent =
+              byStatus.selesai || 0);
+
+          // Update sidebar badge
+          document.getElementById("sb-badge") && filtered.forEach(() => {});
+          const badgeEl = document.querySelector(
+            '[data-section="orders"] .sb-badge',
+          );
+          if (badgeEl) badgeEl.textContent = byStatus.pending || 0;
+
+          const fmt = (n) => "Rp " + Number(n).toLocaleString("id-ID");
+          const fmtDate = (d) =>
+            new Date(d).toLocaleDateString("id-ID", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          const STATUS = {
+            pending: { lbl: "Menunggu", cls: "#fff7ed", color: "#d97706" },
+            diproses: { lbl: "Diproses", cls: "#eff6ff", color: "#2563eb" },
+            dikirim: { lbl: "Dikirim", cls: "#fff7ed", color: "#ea580c" },
+            selesai: { lbl: "Selesai", cls: "#f0fdf4", color: "#16a34a" },
+          };
+          const NEXT = {
+            pending: "diproses",
+            diproses: "dikirim",
+            dikirim: "selesai",
+          };
+          const NEXT_L = {
+            pending: "✅ Konfirmasi",
+            diproses: "🚚 Kirim",
+            dikirim: "✅ Selesai",
+          };
+
+          const el = document.getElementById("orders-list");
+          if (!el) return;
+
+          if (!filtered.length) {
+            el.innerHTML = `<div class="card" style="padding:48px;text-align:center;color:#94a3b8">
+        <div style="font-size:40px;margin-bottom:10px">📋</div>
+        <div style="font-size:14px;font-weight:600">Belum ada pesanan${filterStatus && filterStatus !== "all" ? " dengan status ini" : ""}</div>
+      </div>`;
+            return;
+          }
+
+          el.innerHTML = filtered
+            .map((t) => {
+              const s = STATUS[t.status] || STATUS.pending;
+              const preview = t.products.slice(0, 2);
+              const more = t.products.length - 2;
+              const hasNext = NEXT[t.status];
+              return `<div class="card" style="border-left:4px solid ${s.color}">
+        <div style="background:#f8fafc;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-bottom:1px solid #f1f5f9">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="background:${s.cls};color:${s.color};padding:3px 10px;border-radius:6px;font-size:11px;font-weight:800;text-transform:uppercase">${s.lbl}</span>
+            <span style="font-size:12px;color:#94a3b8;font-family:monospace">${t.transactionId}</span>
+          </div>
+          <span style="font-size:11.5px;color:#94a3b8">${fmtDate(t.createdAt)}</span>
+        </div>
+        <div style="padding:14px 16px">
+          <div style="font-size:12.5px;color:#64748b;margin-bottom:10px;display:flex;align-items:center;gap:6px">
+            👤 <strong>${t.buyerName}</strong> · ${t.address.city || ""} · ${t.address.phone || ""} · <em>${t.paymentMethod?.toUpperCase()}</em>
+          </div>
+          ${preview
+            .map(
+              (p) => `
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+              <img src="${p.image}" onerror="this.src='https://picsum.photos/seed/${p.productId}/80/80'" style="width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid #f1f5f9">
+              <div style="flex:1;min-width:0">
+                <div style="font-size:13px;font-weight:700;color:#1e293b">${p.name}</div>
+                <div style="font-size:12px;color:#94a3b8">${fmt(p.price)} × ${p.qty}</div>
+              </div>
+              <div style="font-weight:800;color:#16a34a;font-size:13px">${fmt(p.subtotal)}</div>
+            </div>`,
+            )
+            .join("")}
+          ${more > 0 ? `<div style="font-size:12px;color:#94a3b8;padding-left:54px">+${more} produk lainnya</div>` : ""}
+        </div>
+        <div style="padding:12px 16px;border-top:1px solid #f8fafc;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <div style="font-size:15px;font-weight:900;color:#16a34a">Total: ${fmt(t.total)}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            ${hasNext ? `<button class="btn btn-solid btn-sm" onclick="sellerChangeStatus('${t.transactionId}','${NEXT[t.status]}')">${NEXT_L[t.status]}</button>` : ""}
+            <a href="invoice.html?id=${t.transactionId}" target="_blank" class="btn btn-outline btn-sm">🧾 Invoice</a>
+          </div>
+        </div>
+      </div>`;
+            })
+            .join("");
+        }
+
+        function sellerChangeStatus(txId, newStatus) {
+          PM_TX.updateStatus(
+            txId,
+            newStatus,
+            newStatus === "diproses"
+              ? "Seller mengkonfirmasi pesanan"
+              : newStatus === "dikirim"
+                ? "Pesanan telah dikirim"
+                : "Pesanan selesai",
+          );
+          PM_AUTH.toast("✅ Status pesanan diperbarui!", "ok");
+          const activeFilter =
+            document.querySelector(".seller-ord-filter.active")?.dataset.f ||
+            "all";
+          renderSellerOrders(activeFilter);
+        }
+
+        // Expose to global scope so navigate() and onclick attributes can access them
+        window.renderSellerOrders = renderSellerOrders;
+        window.sellerChangeStatus = sellerChangeStatus;
+
+        // Render orders immediately if the page loads with #orders section visible
+        if (
+          document.getElementById("page-orders")?.classList.contains("active")
+        ) {
+          renderSellerOrders("all");
+        }
+
+        // Filter buttons
+        document.addEventListener("click", (e) => {
+          const btn = e.target.closest(".seller-ord-filter");
+          if (!btn) return;
+          document.querySelectorAll(".seller-ord-filter").forEach((b) => {
+            b.classList.remove("active", "btn-solid");
+            b.classList.add("btn-outline");
+          });
+          btn.classList.add("active", "btn-solid");
+          btn.classList.remove("btn-outline");
+          renderSellerOrders(btn.dataset.f);
+        });
+      });
+    </script>
+  </body>
+</html>

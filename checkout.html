@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout — Purbalingga Mart</title>
+  <link rel="stylesheet" href="assets/css/checkout.css"/>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="ck-nav">
+  <a href="index.html" class="ck-nav-brand">
+    <div class="ck-nav-logo">🏪</div>
+    <span class="ck-nav-name">PURBALINGGA MART</span>
+  </a>
+
+  <!-- Progress steps -->
+  <div class="ck-nav-steps">
+    <div class="ck-step done">
+      <div class="ck-step-num">✓</div>
+      <span>Keranjang</span>
+    </div>
+    <div class="ck-step-line done"></div>
+    <div class="ck-step active">
+      <div class="ck-step-num">2</div>
+      <span>Checkout</span>
+    </div>
+    <div class="ck-step-line"></div>
+    <div class="ck-step">
+      <div class="ck-step-num">3</div>
+      <span>Pembayaran</span>
+    </div>
+  </div>
+
+  <button class="ck-nav-back" onclick="window.history.back()">
+    <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+    Kembali
+  </button>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="ck-page" id="ck-page-content">
+  <div class="ck-layout">
+
+    <!-- ═══════════════ MAIN COLUMN ═══════════════ -->
+    <div class="ck-main">
+
+      <!-- 1. PRODUK YANG DIPESAN -->
+      <div class="ck-card">
+        <div class="ck-card-head">
+          <div class="ck-card-icon green">🛒</div>
+          <div>
+            <div class="ck-card-title">Produk yang Dipesan</div>
+            <div class="ck-card-sub">Pastikan produk sudah sesuai</div>
+          </div>
+        </div>
+        <div class="ck-prod-list" id="ck-product-list">
+          <!-- Filled by checkout.js -->
+          <div style="padding:40px 20px;text-align:center;color:#94a3b8">
+            <div style="font-size:32px;margin-bottom:8px">⏳</div>
+            <div>Memuat produk...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ALAMAT PENGIRIMAN -->
+      <div class="ck-card">
+        <div class="ck-card-head">
+          <div class="ck-card-icon orange">📍</div>
+          <div>
+            <div class="ck-card-title">Alamat Pengiriman</div>
+            <div class="ck-card-sub">Pastikan alamat lengkap dan benar</div>
+          </div>
+        </div>
+        <div class="ck-card-body">
+
+          <!-- Saved address box -->
+          <div class="ck-saved-addr" id="ck-saved-address" style="display:none;margin-bottom:16px">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div class="ck-saved-addr-info">
+              <div class="ck-saved-addr-name">— · —</div>
+              <div class="ck-saved-addr-detail">Klik untuk menggunakan alamat tersimpan</div>
+            </div>
+          </div>
+
+          <div class="ck-addr-form">
+            <div class="ck-form-grid">
+              <div class="ck-form-group">
+                <label class="ck-form-label" for="addr-name">Nama Penerima <span class="ck-form-req">*</span></label>
+                <input class="ck-form-input" type="text" id="addr-name" placeholder="Nama lengkap penerima" autocomplete="name"/>
+              </div>
+              <div class="ck-form-group">
+                <label class="ck-form-label" for="addr-phone">Nomor HP <span class="ck-form-req">*</span></label>
+                <input class="ck-form-input" type="tel" id="addr-phone" placeholder="08xxxxxxxxxx" autocomplete="tel"/>
+              </div>
+            </div>
+
+            <div class="ck-form-grid">
+              <div class="ck-form-group">
+                <label class="ck-form-label" for="addr-province">Provinsi <span class="ck-form-req">*</span></label>
+                <select class="ck-form-select" id="addr-province">
+                  <option value="">-- Pilih Provinsi --</option>
+                  <option value="Jawa Tengah" selected>Jawa Tengah</option>
+                  <option value="Jawa Barat">Jawa Barat</option>
+                  <option value="Jawa Timur">Jawa Timur</option>
+                  <option value="DKI Jakarta">DKI Jakarta</option>
+                  <option value="DI Yogyakarta">DI Yogyakarta</option>
+                  <option value="Banten">Banten</option>
+                  <option value="Sumatera Utara">Sumatera Utara</option>
+                  <option value="Bali">Bali</option>
+                  <option value="Kalimantan">Kalimantan</option>
+                  <option value="Sulawesi">Sulawesi</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </div>
+              <div class="ck-form-group">
+                <label class="ck-form-label" for="addr-city">Kota/Kabupaten <span class="ck-form-req">*</span></label>
+                <select class="ck-form-select" id="addr-city">
+                  <option value="">-- Pilih Kota --</option>
+                  <option value="Purbalingga Kota">Kab. Purbalingga</option>
+                  <option value="Banyumas">Kab. Banyumas</option>
+                  <option value="Cilacap">Kab. Cilacap</option>
+                  <option value="Banjarnegara">Kab. Banjarnegara</option>
+                  <option value="Kebumen">Kab. Kebumen</option>
+                  <option value="Pemalang">Kab. Pemalang</option>
+                  <option value="Semarang">Kota Semarang</option>
+                  <option value="Yogyakarta">Kota Yogyakarta</option>
+                  <option value="Jakarta">DKI Jakarta</option>
+                  <option value="Bandung">Kota Bandung</option>
+                  <option value="Surabaya">Kota Surabaya</option>
+                  <option value="Lainnya">Kota/Kab Lainnya</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="ck-form-grid">
+              <div class="ck-form-group">
+                <label class="ck-form-label" for="addr-district">Kecamatan</label>
+                <input class="ck-form-input" type="text" id="addr-district" placeholder="Nama kecamatan"/>
+              </div>
+              <div class="ck-form-group">
+                <label class="ck-form-label" for="addr-postal">Kode Pos</label>
+                <input class="ck-form-input" type="text" id="addr-postal" placeholder="53311" maxlength="5"/>
+              </div>
+            </div>
+
+            <div class="ck-form-group ck-form-full">
+              <label class="ck-form-label" for="addr-detail">Alamat Lengkap <span class="ck-form-req">*</span></label>
+              <textarea class="ck-form-textarea" id="addr-detail" rows="3"
+                        placeholder="Nama jalan, nomor rumah, RT/RW, patokan, dll."></textarea>
+              <div class="ck-form-hint">Contoh: Jl. Mawar No. 5, RT 02/RW 03, dekat Masjid Al-Ikhlas</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 3. PILIH PENGIRIMAN -->
+      <div class="ck-card">
+        <div class="ck-card-head">
+          <div class="ck-card-icon blue">🚚</div>
+          <div>
+            <div class="ck-card-title">Metode Pengiriman</div>
+            <div class="ck-card-sub">Ongkir otomatis berdasarkan lokasi</div>
+          </div>
+        </div>
+        <div class="ck-card-body">
+          <div class="ck-shipping-opts" id="ck-shipping-opts">
+            <!-- Filled by checkout.js -->
+            <div style="padding:20px;text-align:center;color:#94a3b8;font-size:13px">Pilih kota tujuan untuk melihat opsi pengiriman</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. METODE PEMBAYARAN -->
+      <div class="ck-card">
+        <div class="ck-card-head">
+          <div class="ck-card-icon purple">💳</div>
+          <div>
+            <div class="ck-card-title">Metode Pembayaran</div>
+            <div class="ck-card-sub">Pilih metode yang paling nyaman</div>
+          </div>
+        </div>
+        <div class="ck-card-body">
+          <div class="ck-pay-grid" id="ck-payment-grid">
+            <!-- Filled by checkout.js -->
+          </div>
+
+          <!-- Bank transfer detail -->
+          <div class="ck-bank-detail" id="ck-bank-detail">
+            <div class="ck-bank-row">
+              <span class="ck-bank-label">Bank BCA</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="ck-bank-value" id="bca-number">1234567890</span>
+                <button class="ck-copy-btn" data-val="1234567890">Salin</button>
+              </div>
+            </div>
+            <div class="ck-bank-row">
+              <span class="ck-bank-label">Bank BRI</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="ck-bank-value">0987654321</span>
+                <button class="ck-copy-btn" data-val="0987654321">Salin</button>
+              </div>
+            </div>
+            <div class="ck-bank-row">
+              <span class="ck-bank-label">Bank Mandiri</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="ck-bank-value">1122334455</span>
+                <button class="ck-copy-btn" data-val="1122334455">Salin</button>
+              </div>
+            </div>
+            <div class="ck-bank-row" style="border-top:1px solid #dbeafe;margin-top:4px;padding-top:8px">
+              <span class="ck-bank-label">a.n.</span>
+              <span class="ck-bank-value">Purbalingga Mart</span>
+            </div>
+            <div style="font-size:11.5px;color:#1e40af;margin-top:8px;font-weight:500">
+              ⚠️ Transfer sesuai total tagihan. Upload bukti ke seller via WhatsApp setelah transfer.
+            </div>
+          </div>
+
+          <!-- E-wallet detail -->
+          <div class="ck-bank-detail" id="ck-ewallet-detail" style="background:#f0fdf4;border-color:#bbf7d0">
+            <div class="ck-bank-row" style="border-color:#bbf7d0">
+              <span class="ck-bank-label" style="color:#15803d">GoPay / OVO / Dana</span>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span class="ck-bank-value" style="color:#15803d">0812-3456-7890</span>
+                <button class="ck-copy-btn" data-val="081234567890" style="background:#bbf7d0;color:#15803d">Salin</button>
+              </div>
+            </div>
+            <div style="font-size:11.5px;color:#15803d;margin-top:6px;font-weight:500">
+              ✅ Transfer ke nomor di atas lalu konfirmasi ke seller via WhatsApp.
+            </div>
+          </div>
+
+          <!-- QRIS box -->
+          <!-- QRIS box — diisi otomatis dari Supabase oleh PM_QRIS.renderInCheckout() -->
+          <div class="ck-qris-box" id="ck-qris-box">
+            <div style="text-align:center;padding:20px;color:#94a3b8">
+              <div style="font-size:22px;margin-bottom:6px">⏳</div>
+              <div style="font-size:12px">Memuat QRIS...</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 5. VOUCHER -->
+      <div class="ck-card">
+        <div class="ck-card-head">
+          <div class="ck-card-icon orange">🎟️</div>
+          <div>
+            <div class="ck-card-title">Voucher & Promo</div>
+            <div class="ck-card-sub">Masukkan kode untuk mendapatkan diskon</div>
+          </div>
+        </div>
+        <div class="ck-card-body">
+          <div class="ck-voucher-row">
+            <input class="ck-voucher-input" type="text" id="ck-voucher-input"
+                   placeholder="Contoh: HEMAT10 atau GRATISONGKIR"/>
+            <button class="ck-voucher-btn" id="ck-voucher-btn">Pakai</button>
+          </div>
+
+          <!-- Applied badge -->
+          <div class="ck-voucher-applied" id="ck-voucher-applied">
+            <div class="ck-voucher-applied-txt">✅ <span id="ck-voucher-label">Voucher Aktif</span></div>
+            <button class="ck-voucher-remove" id="ck-voucher-remove">Hapus</button>
+          </div>
+
+          <!-- Available vouchers chips -->
+          <div class="ck-voucher-list" id="ck-voucher-chips">
+            <!-- Filled by checkout.js -->
+          </div>
+          <div style="font-size:11.5px;color:#94a3b8;margin-top:8px">
+            💡 Coba: <strong>HEMAT10</strong>, <strong>HEMAT20</strong>, <strong>GRATISONGKIR</strong>, <strong>DISKON50</strong>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ck-main -->
+
+    <!-- ═══════════════ SIDEBAR SUMMARY ═══════════════ -->
+    <aside class="ck-aside">
+      <div class="ck-card ck-summary">
+        <div class="ck-sum-title">Ringkasan Pesanan</div>
+
+        <!-- Product preview -->
+        <div id="ck-sum-products">
+          <!-- Filled by checkout.js -->
+        </div>
+
+        <div class="ck-sum-body">
+          <div class="ck-sum-row">
+            <span>Subtotal</span>
+            <span class="ck-sum-val" id="sum-subtotal">Rp 0</span>
+          </div>
+          <div class="ck-sum-row">
+            <span>Jumlah Item</span>
+            <span class="ck-sum-val" id="sum-items">0 produk</span>
+          </div>
+          <div class="ck-sum-row">
+            <span>Ongkos Kirim</span>
+            <span class="ck-sum-val" id="sum-shipping">—</span>
+          </div>
+          <div class="ck-sum-row" id="sum-discount-row" style="display:none">
+            <span>Diskon Voucher</span>
+            <span class="ck-sum-val red" id="sum-discount">Rp 0</span>
+          </div>
+          <div class="ck-sum-row">
+            <span>Biaya Layanan</span>
+            <span class="ck-sum-val" id="sum-service">Rp 0</span>
+          </div>
+          <div class="ck-sum-divider"></div>
+          <div class="ck-sum-row total">
+            <span>TOTAL</span>
+            <span id="sum-total">Rp 0</span>
+          </div>
+        </div>
+
+        <div style="padding:0 16px 16px">
+          <button class="ck-submit-btn" id="ck-submit-btn" disabled>
+            <svg viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
+            Buat Pesanan · <span id="sum-btn-total">Rp 0</span>
+          </button>
+          <div class="ck-security">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Transaksi aman & terenkripsi
+          </div>
+          <div style="text-align:center;font-size:11.5px;color:#94a3b8;margin-top:8px">
+            Dengan menekan tombol di atas, Anda menyetujui
+            <a href="#" style="color:#16a34a" onclick="return false">Syarat & Ketentuan</a> kami.
+          </div>
+        </div>
+      </div>
+
+      <!-- Why trust us -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;margin-top:14px">
+        <div style="font-size:12.5px;font-weight:700;color:#1e293b;margin-bottom:12px">🛡️ Belanja Aman di Purbalingga Mart</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:#475569">
+            <span style="font-size:16px">✅</span><span>Produk UMKM asli & terpercaya</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:#475569">
+            <span style="font-size:16px">💚</span><span>COD tersedia area Purbalingga</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:#475569">
+            <span style="font-size:16px">🔒</span><span>Data transaksi aman & privat</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:#475569">
+            <span style="font-size:16px">🔄</span><span>Mudah komplain ke seller</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /ck-layout -->
+</div><!-- /ck-page -->
+
+<div id="ck-toast-wrap" class="ck-toast-wrap"></div>
+
+<!-- Scripts -->
+<script src="auth.js"></script>
+<script src="supabase-config.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/transaction.js"></script>
+<script src="assets/js/checkout.js"></script>
+
+<!-- Auto-render QRIS saat payment QRIS dipilih -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Patch showPaymentDetail supaya render QRIS dari Supabase
+    const _origRender = window.PM_CHECKOUT;
+    document.getElementById('ck-payment-grid')?.addEventListener('click', (e) => {
+      const card = e.target.closest('.ck-pay-card');
+      if (card && card.dataset.method === 'qris') {
+        setTimeout(() => {
+          if (typeof PM_QRIS !== 'undefined') PM_QRIS.renderInCheckout();
+        }, 50);
+      }
+    });
+  });
+</script>
+
+<!-- Update cart.js checkout() to redirect to checkout page -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.PM_CART) {
+      PM_CART.checkout = function() {
+        const cart = PM_DB.getCart();
+        if (!cart.length) { PM_AUTH.toast('Keranjang kosong!','err'); return; }
+        if (!PM_AUTH.isLoggedIn()) { PM_AUTH.showLoginModal(); return; }
+        window.location.href = 'checkout.html';
+      };
+    }
+  });
+</script>
+</body>
+</html>

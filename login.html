@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Masuk — Purbalingga Mart</title>
+  <link rel="stylesheet" href="login.css"/>
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<div class="auth-page">
+
+  <!-- ============================================================
+       LEFT PANEL — Branding
+       ============================================================ -->
+  <div class="auth-left">
+    <div class="auth-left-content">
+
+      <!-- Brand -->
+      <div class="al-brand">
+        <div class="al-logo">🏪</div>
+        <div class="al-brand-texts">
+          <div class="al-brand-name">PURBALINGGA MART</div>
+          <div class="al-brand-sub">Marketplace Lokal Modern</div>
+        </div>
+      </div>
+
+      <h2 class="al-headline">Belanja Produk <em>UMKM Lokal</em><br>Langsung dari Sumbernya</h2>
+      <p class="al-desc">Platform marketplace produk lokal Purbalingga. Dukung UMKM lokal dan temukan produk autentik berkualitas.</p>
+
+      <!-- Features -->
+      <div class="al-features">
+        <div class="al-feat">
+          <div class="al-feat-icon">✅</div>
+          <div class="al-feat-text">Produk UMKM asli & terpercaya</div>
+        </div>
+        <div class="al-feat">
+          <div class="al-feat-icon">🚀</div>
+          <div class="al-feat-text">Seller mudah daftar & kelola toko</div>
+        </div>
+        <div class="al-feat">
+          <div class="al-feat-icon">💬</div>
+          <div class="al-feat-text">Langsung hubungi seller via WhatsApp</div>
+        </div>
+        <div class="al-feat">
+          <div class="al-feat-icon">🏠</div>
+          <div class="al-feat-text">COD tersedia area Purbalingga</div>
+        </div>
+      </div>
+
+      <!-- Demo credentials -->
+      <div class="al-creds">
+        <div class="al-creds-title">🔑 Demo Akun — Klik untuk isi otomatis</div>
+
+        <div class="al-creds-row">
+          <span class="al-creds-role cr-admin">👑 Admin</span>
+          <span class="al-creds-detail">admin / admin123</span>
+          <button class="al-creds-btn" onclick="fillDemo('admin','admin123','admin')">Isi</button>
+        </div>
+        <div class="al-creds-row">
+          <span class="al-creds-role cr-seller">🏪 Seller</span>
+          <span class="al-creds-detail">seller1 / seller123</span>
+          <button class="al-creds-btn" onclick="fillDemo('seller1','seller123','seller')">Isi</button>
+        </div>
+        <div class="al-creds-row">
+          <span class="al-creds-role cr-buyer">🛒 Buyer</span>
+          <span class="al-creds-detail">buyer / buyer123</span>
+          <button class="al-creds-btn" onclick="fillDemo('buyer','buyer123','buyer')">Isi</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       RIGHT PANEL — Form
+       ============================================================ -->
+  <div class="auth-right">
+    <div class="auth-form-wrap">
+
+      <!-- Back link -->
+      <a href="index.html" class="auth-back">
+        <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+        Kembali ke Marketplace
+      </a>
+
+      <!-- Heading -->
+      <h1 class="auth-heading">Masuk ke Akun</h1>
+      <p class="auth-sub">Belum punya akun? <a href="register-store.html">Daftar sebagai Seller →</a></p>
+
+      <!-- Role Tabs -->
+      <div class="role-tabs" role="tablist" aria-label="Pilih tipe akun">
+        <button class="role-tab active" data-role="buyer"  role="tab">🛒 Pembeli</button>
+        <button class="role-tab"        data-role="seller" role="tab">🏪 Seller</button>
+        <button class="role-tab"        data-role="admin"  role="tab">👑 Admin</button>
+      </div>
+
+      <!-- Role info -->
+      <div class="role-info">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="role-info-text"></span>
+      </div>
+
+      <!-- Alert -->
+      <div class="auth-alert" id="login-alert" role="alert">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="login-alert-msg"></span>
+      </div>
+
+      <!-- Form -->
+      <form id="login-form" novalidate autocomplete="off" onsubmit="return false">
+
+        <!-- Username -->
+        <div class="form-group">
+          <label class="form-label" for="login-user">Username atau Email</label>
+          <div class="input-wrap">
+            <svg class="fi" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input
+              class="form-input" type="text" id="login-user"
+              placeholder="Masukkan username atau email"
+              autocomplete="username" spellcheck="false"
+              aria-label="Username atau Email"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label" for="login-pass">Password</label>
+          <div class="input-wrap">
+            <svg class="fi" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <input
+              class="form-input" type="password" id="login-pass"
+              placeholder="Masukkan password"
+              autocomplete="current-password"
+              aria-label="Password"
+              style="padding-right:44px"
+            />
+            <button type="button" class="pass-toggle" id="pass-toggle-btn" aria-label="Tampilkan password">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Remember me -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+          <label style="display:flex;align-items:center;gap:7px;font-size:13px;color:#64748b;cursor:pointer">
+            <input type="checkbox" id="remember-me" style="accent-color:#16a34a;width:14px;height:14px">
+            Ingat saya
+          </label>
+          <a href="#" style="font-size:13px;color:#16a34a;font-weight:600" onclick="PM_AUTH.toast('Fitur reset password segera hadir!','info');return false">Lupa password?</a>
+        </div>
+
+        <!-- Submit -->
+        <button type="button" class="form-submit" id="login-submit">
+          <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Masuk
+        </button>
+
+      </form>
+
+      <!-- Divider -->
+      <div class="form-divider">atau</div>
+
+      <!-- Register link -->
+      <div class="auth-footer-text">
+        Belum punya akun?<br>
+        <a href="register-store.html">Daftar sekarang →</a>
+      </div>
+
+      <!-- Go back -->
+      <div class="auth-footer-text" style="margin-top:12px">
+        <a href="index.html" style="color:#94a3b8;font-weight:500">← Lihat Marketplace tanpa login</a>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /auth-page -->
+
+<script src="auth.js"></script>
+<script src="login.js"></script>
+
+</body>
+</html>

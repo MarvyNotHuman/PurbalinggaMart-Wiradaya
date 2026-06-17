@@ -1,0 +1,332 @@
+/* ================================================================
+   PURBALINGGA MART — Login Page CSS
+   login.css · Modern split-screen auth design
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+button,input,select{font-family:inherit;outline:none}
+
+/* ── Tokens ──────────────────────────────────────────────────── */
+:root{
+  --g:#16a34a;--g-dk:#15803d;--g-xdk:#14532d;--g-lt:#dcfce7;--g-xlt:#f0fdf4;
+  --or:#f97316;--rd:#ef4444;--bl:#3b82f6;--yl:#f59e0b;
+  --wh:#fff;--bg:#f1f5f9;--brd:#e2e8f0;--txt:#1e293b;--txt-m:#64748b;--txt-lt:#94a3b8;
+  --sh-md:0 4px 12px rgba(0,0,0,.08);--sh-lg:0 12px 32px rgba(0,0,0,.12);--sh-xl:0 24px 60px rgba(0,0,0,.14);
+  --r:10px;--r-md:14px;--r-lg:20px;--r-f:9999px;--t:all .22s ease;
+}
+
+/* ================================================================
+   PAGE LAYOUT
+   ================================================================ */
+.auth-page{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+
+/* ================================================================
+   LEFT PANEL — Branding
+   ================================================================ */
+.auth-left{
+  background:linear-gradient(145deg,#16a34a 0%,#15803d 40%,#14532d 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:52px 48px;position:relative;overflow:hidden;
+}
+/* decorative circles */
+.auth-left::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(255,255,255,.06);pointer-events:none;
+}
+.auth-left::after{
+  content:'';position:absolute;bottom:-60px;left:-60px;
+  width:240px;height:240px;border-radius:50%;
+  background:rgba(255,255,255,.04);pointer-events:none;
+}
+.auth-left-content{position:relative;z-index:1;width:100%;max-width:400px;text-align:center}
+
+/* Brand */
+.al-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:36px}
+.al-logo{
+  width:52px;height:52px;background:rgba(255,255,255,.18);
+  border:2px solid rgba(255,255,255,.3);border-radius:14px;
+  display:grid;place-items:center;font-size:26px;
+}
+.al-brand-texts{text-align:left}
+.al-brand-name{font-size:19px;font-weight:900;color:#fff;letter-spacing:-.4px;line-height:1}
+.al-brand-sub{font-size:11px;color:rgba(255,255,255,.65);font-weight:500;margin-top:2px}
+
+.al-headline{font-size:clamp(20px,2.5vw,28px);font-weight:800;color:#fff;line-height:1.25;margin-bottom:10px}
+.al-headline em{color:#86efac;font-style:normal}
+.al-desc{font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.65;margin-bottom:32px}
+
+/* Features list */
+.al-features{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;text-align:left}
+.al-feat{
+  display:flex;align-items:center;gap:11px;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;padding:11px 16px;
+}
+.al-feat-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.al-feat-text{font-size:13px;font-weight:500;color:rgba(255,255,255,.88)}
+
+/* Credentials box */
+.al-creds{
+  background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;padding:16px 18px;text-align:left;
+}
+.al-creds-title{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.al-creds-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);gap:10px;
+}
+.al-creds-row:last-child{border-bottom:none;padding-bottom:0}
+.al-creds-role{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;
+  padding:2px 8px;border-radius:var(--r-f);flex-shrink:0;
+}
+.cr-admin{background:rgba(139,92,246,.3);color:#c4b5fd}
+.cr-seller{background:rgba(22,163,74,.25);color:#86efac}
+.cr-buyer{background:rgba(59,130,246,.25);color:#93c5fd}
+.al-creds-detail{font-size:12px;color:rgba(255,255,255,.75);font-family:'Courier New',monospace;letter-spacing:.3px}
+.al-creds-btn{
+  font-size:11px;font-weight:600;color:rgba(255,255,255,.6);
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:6px;padding:3px 9px;cursor:pointer;transition:var(--t);
+  font-family:'Poppins',sans-serif;white-space:nowrap;flex-shrink:0;
+}
+.al-creds-btn:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* ================================================================
+   RIGHT PANEL — Form
+   ================================================================ */
+.auth-right{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:48px 40px;background:var(--wh);overflow-y:auto;
+}
+.auth-form-wrap{width:100%;max-width:420px}
+
+/* Back link */
+.auth-back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--txt-m);
+  margin-bottom:28px;transition:var(--t);cursor:pointer;
+}
+.auth-back:hover{color:var(--g)}
+.auth-back svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Heading */
+.auth-heading{font-size:24px;font-weight:800;color:var(--txt);margin-bottom:4px}
+.auth-sub{font-size:13.5px;color:var(--txt-m);margin-bottom:24px}
+.auth-sub a{color:var(--g);font-weight:600}
+.auth-sub a:hover{text-decoration:underline}
+
+/* Role tabs */
+.role-tabs{display:flex;background:var(--bg);border-radius:10px;padding:4px;gap:4px;margin-bottom:24px}
+.role-tab{
+  flex:1;padding:9px 8px;border:none;background:transparent;
+  font-family:inherit;font-size:12.5px;font-weight:600;color:var(--txt-m);
+  cursor:pointer;border-radius:7px;transition:var(--t);
+  display:flex;align-items:center;justify-content:center;gap:5px;
+}
+.role-tab:hover{color:var(--g)}
+.role-tab.active{background:var(--wh);color:var(--g);box-shadow:var(--sh-md)}
+
+/* Alert */
+.auth-alert{
+  display:none;align-items:flex-start;gap:10px;
+  background:#fef2f2;border:1px solid #fecaca;border-radius:9px;
+  padding:12px 14px;font-size:13px;color:#991b1b;
+  margin-bottom:18px;line-height:1.5;
+}
+.auth-alert.show{display:flex}
+.auth-alert svg{width:16px;height:16px;stroke:#ef4444;fill:none;stroke-width:2;flex-shrink:0;margin-top:1px}
+.auth-alert.info-alert{background:#eff6ff;border-color:#bfdbfe;color:#1e40af}
+.auth-alert.info-alert svg{stroke:var(--bl)}
+.auth-alert.ok-alert{background:var(--g-xlt);border-color:var(--g-lt);color:#14532d}
+.auth-alert.ok-alert svg{stroke:var(--g)}
+
+/* Form groups */
+.form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.form-label{font-size:13px;font-weight:600;color:var(--txt)}
+.input-wrap{position:relative}
+.input-wrap svg.fi{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;stroke:var(--txt-lt);fill:none;stroke-width:2;pointer-events:none;
+}
+.form-input{
+  width:100%;height:46px;border:1.5px solid var(--brd);border-radius:var(--r);
+  padding:0 14px 0 42px;font-size:14px;color:var(--txt);
+  background:var(--bg);transition:var(--t);
+}
+.form-input:focus{border-color:var(--g);background:var(--wh);box-shadow:0 0 0 3px rgba(22,163,74,.10)}
+.form-input.error{border-color:var(--rd);box-shadow:0 0 0 3px rgba(239,68,68,.10)}
+.form-input::placeholder{color:var(--txt-lt)}
+.form-input.no-icon{padding-left:14px}
+
+/* Password toggle */
+.pass-toggle{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;color:var(--txt-lt);
+  display:grid;place-items:center;padding:4px;transition:var(--t);
+}
+.pass-toggle:hover{color:var(--txt-m)}
+.pass-toggle svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Submit button */
+.form-submit{
+  width:100%;height:48px;background:var(--g);color:#fff;
+  border:none;border-radius:var(--r);font-size:15px;font-weight:700;
+  cursor:pointer;transition:var(--t);display:flex;align-items:center;
+  justify-content:center;gap:8px;margin-top:4px;
+}
+.form-submit:hover{background:var(--g-dk)}
+.form-submit:disabled{background:var(--brd);color:var(--txt-lt);cursor:not-allowed}
+.form-submit svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.5}
+
+/* Loading spinner */
+.spinner{
+  width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Divider */
+.form-divider{
+  display:flex;align-items:center;gap:12px;
+  color:var(--txt-lt);font-size:12.5px;margin:18px 0;
+}
+.form-divider::before,.form-divider::after{content:'';flex:1;height:1px;background:var(--brd)}
+
+/* Footer link */
+.auth-footer-text{
+  text-align:center;font-size:13px;color:var(--txt-m);margin-top:20px;line-height:1.6;
+}
+.auth-footer-text a{color:var(--g);font-weight:600}
+.auth-footer-text a:hover{text-decoration:underline}
+
+/* Role info badge */
+.role-info{
+  background:var(--g-xlt);border:1px solid var(--g-lt);border-radius:9px;
+  padding:10px 14px;font-size:12.5px;color:var(--g-xdk);
+  margin-bottom:16px;display:flex;align-items:center;gap:8px;
+}
+.role-info svg{width:15px;height:15px;stroke:var(--g);fill:none;stroke-width:2;flex-shrink:0}
+
+/* Shake animation for error */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%,60%{transform:translateX(-6px)}
+  40%,80%{transform:translateX(6px)}
+}
+.shake{animation:shake .4s ease}
+
+/* ================================================================
+   REGISTER PAGE EXTRAS
+   ================================================================ */
+.auth-card{
+  background:var(--wh);border-radius:var(--r-lg);
+  box-shadow:var(--sh-xl);padding:36px 40px;
+  width:100%;max-width:540px;
+}
+.auth-card-logo{
+  width:50px;height:50px;background:var(--g);border-radius:12px;
+  display:grid;place-items:center;font-size:24px;margin:0 auto 16px;
+}
+.auth-card-title{font-size:22px;font-weight:800;color:var(--txt);text-align:center;margin-bottom:4px}
+.auth-card-sub{font-size:13px;color:var(--txt-m);text-align:center;margin-bottom:28px}
+
+/* Form grid */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-full{grid-column:1/-1}
+
+.form-select{
+  width:100%;height:46px;border:1.5px solid var(--brd);border-radius:var(--r);
+  padding:0 36px 0 14px;font-size:13.5px;color:var(--txt);
+  background:var(--bg);transition:var(--t);
+  appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+}
+.form-select:focus{border-color:var(--g);background-color:var(--wh);box-shadow:0 0 0 3px rgba(22,163,74,.10)}
+
+/* Password strength */
+.pass-strength{margin-top:7px}
+.strength-bars{display:flex;gap:3px;margin-bottom:4px}
+.strength-bar{height:3px;flex:1;background:var(--brd);border-radius:2px;transition:var(--t)}
+.strength-bar.weak{background:var(--rd)}
+.strength-bar.fair{background:var(--or)}
+.strength-bar.good{background:var(--yl)}
+.strength-bar.strong{background:var(--g)}
+.strength-text{font-size:11.5px;font-weight:600;color:var(--txt-lt)}
+
+/* Terms */
+.terms-check{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--txt-m);margin-top:4px}
+.terms-check input{width:15px;height:15px;accent-color:var(--g);flex-shrink:0;margin-top:2px;cursor:pointer}
+.terms-check a{color:var(--g);font-weight:600}
+
+/* Step indicator */
+.step-line{display:flex;align-items:center;gap:8px;margin-bottom:26px;justify-content:center}
+.step-dot{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  font-size:12px;font-weight:700;flex-shrink:0;transition:var(--t);
+}
+.step-dot.active{background:var(--g);color:#fff}
+.step-dot.done{background:var(--g-lt);color:var(--g)}
+.step-dot.inactive{background:var(--bg);color:var(--txt-lt)}
+.step-connector{height:2px;flex:1;background:var(--brd);border-radius:1px}
+.step-connector.done{background:var(--g-lt)}
+
+/* ================================================================
+   PAGE WRAPPER (register standalone)
+   ================================================================ */
+.register-page{
+  min-height:100vh;background:linear-gradient(135deg,#f0fdf4 0%,#f1f5f9 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px;
+}
+.register-page .auth-back{justify-content:center;margin-bottom:20px}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media(max-width:900px){
+  .auth-page{grid-template-columns:1fr}
+  .auth-left{display:none}
+  .auth-right{padding:32px 24px;min-height:100vh}
+}
+@media(max-width:480px){
+  .auth-card{padding:24px 20px}
+  .form-grid{grid-template-columns:1fr}
+  .auth-right{padding:24px 16px}
+  .role-tab{font-size:11.5px;padding:8px 4px}
+}
+
+/* ================================================================
+   PURBALINGGA MART LOGIN — Orange Theme Overrides
+   Applied via theme.css import in login.html
+   ================================================================ */
+/* These local overrides ensure login page matches new theme even 
+   when theme.css is not loaded (fallback) */
+:root {
+  --g: #f97316;
+  --g-dk: #ea6e0e;
+  --g-xdk: #c2570a;
+  --g-lt: #fed7aa;
+  --g-xlt: #fff7ed;
+}
+.auth-left {
+  background: linear-gradient(145deg, #0f1923 0%, #162030 45%, #0a1520 100%) !important;
+}
+.al-headline em { color: #f97316 !important; }
+.form-submit { background: #f97316 !important; }
+.form-submit:hover { background: #ea6e0e !important; }
+.auth-sub a, .auth-footer-text a { color: #f97316 !important; }
+.role-tab.active { color: #f97316 !important; }
+.form-input:focus { border-color: #f97316 !important; box-shadow: 0 0 0 3px rgba(249,115,22,.12) !important; }
+.auth-back:hover { color: #f97316 !important; }
+.role-info { background: #fff7ed !important; border-color: #fed7aa !important; }
+.role-info svg { stroke: #f97316 !important; }
+.cr-seller { background: rgba(249,115,22,.2) !important; color: #fdba74 !important; }
+.al-creds-btn:hover { background: rgba(249,115,22,.2) !important; color: #fdba74 !important; }

@@ -1,0 +1,284 @@
+/* ================================================================
+   PURBALINGGA MART — invoice.css
+   Professional invoice + print stylesheet
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; background: #f1f5f9; color: #1e293b; }
+
+:root {
+  --g:#16a34a; --g-dk:#15803d; --g-lt:#dcfce7; --g-xlt:#f0fdf4;
+  --rd:#ef4444; --or:#f97316; --bl:#3b82f6; --yl:#f59e0b;
+  --wh:#fff; --bg:#f1f5f9; --brd:#e2e8f0; --txt:#1e293b; --txt-m:#64748b; --txt-lt:#94a3b8;
+  --sh:0 4px 14px rgba(0,0,0,.07); --sh-lg:0 12px 36px rgba(0,0,0,.10);
+  --r:10px; --r-md:14px; --r-lg:18px;
+}
+
+/* ================================================================
+   NAVBAR (screen only)
+   ================================================================ */
+.inv-nav {
+  background: var(--wh);
+  border-bottom: 1px solid var(--brd);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--sh);
+}
+.inv-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.inv-nav-logo  { width: 36px; height: 36px; background: var(--g); border-radius: 9px; display: grid; place-items: center; font-size: 18px; }
+.inv-nav-name  { font-size: 14px; font-weight: 800; color: var(--txt); }
+.inv-nav-acts  { display: flex; gap: 10px; }
+.inv-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; border-radius: var(--r);
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  font-family: 'Poppins', sans-serif; transition: all .2s;
+  border: none; text-decoration: none;
+}
+.inv-btn-primary { background: var(--g); color: #fff; box-shadow: 0 3px 12px rgba(22,163,74,.3); }
+.inv-btn-primary:hover { background: var(--g-dk); }
+.inv-btn-outline { background: var(--wh); color: var(--txt-m); border: 1.5px solid var(--brd); }
+.inv-btn-outline:hover { border-color: var(--g); color: var(--g); }
+.inv-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ================================================================
+   PAGE WRAPPER
+   ================================================================ */
+.inv-page { max-width: 860px; margin: 0 auto; padding: 28px 20px 60px; }
+
+/* ================================================================
+   STATUS BANNER
+   ================================================================ */
+.inv-status-banner {
+  border-radius: var(--r-md);
+  padding: 16px 22px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.inv-status-banner.pending  { background: #fffbeb; border: 1.5px solid #fde68a; }
+.inv-status-banner.diproses { background: #eff6ff; border: 1.5px solid #bfdbfe; }
+.inv-status-banner.dikirim  { background: #fff7ed; border: 1.5px solid #fed7aa; }
+.inv-status-banner.selesai  { background: var(--g-xlt); border: 1.5px solid var(--g-lt); }
+.inv-status-icon { font-size: 32px; flex-shrink: 0; }
+.inv-status-info h3 { font-size: 15px; font-weight: 800; color: var(--txt); }
+.inv-status-info p  { font-size: 13px; color: var(--txt-m); margin-top: 2px; }
+
+/* ================================================================
+   INVOICE CARD (the printable area)
+   ================================================================ */
+#invoice-print-area {
+  background: var(--wh);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg);
+  border: 1px solid var(--brd);
+  overflow: hidden;
+}
+
+/* Header stripe */
+.inv-header {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%);
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.inv-header-brand { display: flex; align-items: center; gap: 14px; }
+.inv-header-logo  { width: 52px; height: 52px; background: rgba(255,255,255,.2); border: 2px solid rgba(255,255,255,.3); border-radius: 14px; display: grid; place-items: center; font-size: 26px; }
+.inv-header-texts .inv-brand-name { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -.3px; }
+.inv-header-texts .inv-brand-sub  { font-size: 11.5px; color: rgba(255,255,255,.75); font-weight: 500; margin-top: 1px; }
+.inv-header-right { text-align: right; }
+.inv-header-right .inv-title { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -.5px; }
+.inv-header-right .inv-number{ font-size: 13px; color: rgba(255,255,255,.8); margin-top: 2px; font-family: 'Courier New', monospace; letter-spacing: .5px; }
+.inv-header-right .inv-date  { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 1px; }
+
+/* Meta row */
+.inv-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--brd);
+}
+.inv-meta-cell {
+  padding: 16px 20px;
+  border-right: 1px solid var(--brd);
+}
+.inv-meta-cell:last-child { border-right: none; }
+.inv-meta-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--txt-lt); margin-bottom: 4px; }
+.inv-meta-value { font-size: 13px; font-weight: 700; color: var(--txt); }
+.inv-meta-sub   { font-size: 11.5px; color: var(--txt-m); margin-top: 2px; }
+
+/* Status badge */
+.inv-status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: var(--r);
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px;
+}
+.sb-pending  { background: #fef3c7; color: #92400e; }
+.sb-diproses { background: #dbeafe; color: #1e40af; }
+.sb-dikirim  { background: #fed7aa; color: #9a3412; }
+.sb-selesai  { background: var(--g-lt); color: var(--g-xdk); }
+
+/* Info grid */
+.inv-info-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--brd); }
+.inv-info-cell { padding: 20px 24px; }
+.inv-info-cell:first-child { border-right: 1px solid var(--brd); }
+.inv-info-title{ font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--txt-lt); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.inv-info-title svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+.inv-info-row  { font-size: 13px; color: var(--txt); margin-bottom: 3px; display: flex; gap: 8px; }
+.inv-info-key  { color: var(--txt-m); font-weight: 500; min-width: 70px; flex-shrink: 0; }
+.inv-info-val  { font-weight: 600; }
+
+/* Products table */
+.inv-table-wrap { padding: 20px 24px; }
+.inv-table-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--txt-lt); margin-bottom: 14px; }
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.inv-table th {
+  background: #f8fafc;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: var(--txt-lt);
+  border-bottom: 1.5px solid var(--brd);
+}
+.inv-table th:last-child, .inv-table td:last-child { text-align: right; }
+.inv-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f8fafc;
+  vertical-align: middle;
+}
+.inv-table tr:last-child td { border-bottom: none; }
+.inv-table-product { display: flex; align-items: center; gap: 10px; }
+.inv-prod-img { width: 42px; height: 42px; border-radius: 7px; object-fit: cover; border: 1px solid var(--brd); flex-shrink: 0; }
+.inv-prod-name{ font-weight: 700; color: var(--txt); }
+.inv-prod-store{ font-size: 11.5px; color: var(--txt-m); margin-top: 1px; }
+.inv-table-price { font-weight: 600; color: var(--txt-m); }
+.inv-table-qty   { font-weight: 700; color: var(--txt); text-align: center !important; }
+.inv-table-sub   { font-weight: 800; color: var(--txt); }
+
+/* Totals block */
+.inv-totals { padding: 16px 24px 20px; border-top: 1px solid var(--brd); display: flex; justify-content: flex-end; }
+.inv-totals-box { width: 280px; }
+.inv-total-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 13px; color: var(--txt-m); border-bottom: 1px solid #f8fafc; }
+.inv-total-row:last-child { border-bottom: none; }
+.inv-total-row.bold { font-size: 14px; font-weight: 700; color: var(--txt); }
+.inv-total-row.grand{
+  font-size: 16px; font-weight: 900;
+  color: var(--g);
+  border-top: 2px solid var(--g-lt);
+  margin-top: 4px;
+  padding-top: 10px;
+}
+.inv-total-row.disc { color: var(--rd); }
+.inv-total-val { font-weight: 700; }
+
+/* Footer */
+.inv-footer {
+  background: #f8fafc;
+  border-top: 1px solid var(--brd);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.inv-footer-note { font-size: 12px; color: var(--txt-m); line-height: 1.6; max-width: 400px; }
+.inv-footer-note strong { color: var(--txt); }
+.inv-footer-qr {
+  text-align: center;
+}
+.inv-qr-box {
+  width: 80px; height: 80px; background: var(--brd);
+  border-radius: 8px; display: grid; place-items: center;
+  font-size: 10px; color: var(--txt-lt); font-weight: 600;
+  border: 1px solid #e2e8f0; margin: 0 auto 4px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: .3px;
+  text-align: center;
+  padding: 6px;
+}
+.inv-footer-qr p { font-size: 10px; color: var(--txt-lt); }
+
+/* Timeline */
+.inv-timeline { padding: 20px 24px; border-top: 1px solid var(--brd); }
+.inv-timeline-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--txt-lt); margin-bottom: 14px; }
+.inv-timeline-list  { display: flex; flex-direction: column; gap: 0; position: relative; }
+.inv-timeline-list::before { content: ''; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: var(--g-lt); }
+.inv-tl-item { display: flex; align-items: flex-start; gap: 14px; padding: 6px 0; position: relative; }
+.inv-tl-dot { width: 24px; height: 24px; border-radius: 50%; background: var(--g-lt); border: 2px solid var(--g); display: grid; place-items: center; flex-shrink: 0; z-index: 1; }
+.inv-tl-dot svg { width: 10px; height: 10px; stroke: var(--g); fill: none; stroke-width: 3; }
+.inv-tl-dot.done { background: var(--g); }
+.inv-tl-dot.done svg { stroke: #fff; }
+.inv-tl-text { flex: 1; }
+.inv-tl-status { font-size: 13px; font-weight: 700; color: var(--txt); text-transform: capitalize; }
+.inv-tl-time   { font-size: 11.5px; color: var(--txt-lt); margin-top: 1px; }
+.inv-tl-note   { font-size: 12px; color: var(--txt-m); margin-top: 2px; }
+
+/* ================================================================
+   PRINT STYLES
+   ================================================================ */
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #fff !important; }
+
+  .inv-nav, .inv-status-banner, .inv-nav-acts, .inv-page > :not(#invoice-print-area),
+  .no-print { display: none !important; }
+
+  .inv-page {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #invoice-print-area {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .inv-header { -webkit-print-color-adjust: exact; }
+
+  .inv-table th, .inv-table td {
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .inv-prod-img { border: 1px solid #e2e8f0 !important; }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm;
+  }
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media(max-width:700px) {
+  .inv-meta { grid-template-columns: 1fr 1fr; }
+  .inv-meta-cell:nth-child(2) { border-right: none; }
+  .inv-info-grid { grid-template-columns: 1fr; }
+  .inv-info-cell:first-child { border-right: none; border-bottom: 1px solid var(--brd); }
+  .inv-header { padding: 20px; }
+  .inv-header-right .inv-title { font-size: 17px; }
+  .inv-totals { padding: 14px; }
+  .inv-totals-box { width: 100%; }
+  .inv-footer { flex-direction: column; gap: 14px; }
+}
+
+/* ── Orange Theme Override ── */
+:root {
+  --g: #f97316; --g-dk: #ea6e0e; --g-xdk: #c2570a;
+  --g-lt: #fed7aa; --g-xlt: #fff7ed;
+}

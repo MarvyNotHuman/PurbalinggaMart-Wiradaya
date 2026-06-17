@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — Purbalingga Mart</title>
+  <link rel="stylesheet" href="admin.css"/>
+  <link rel="stylesheet" href="assets/css/products.css"/>
+  <style>
+    .quick-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .qa-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1.5px solid #e2e8f0;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+    }
+    .qa-item:hover {
+      border-color: #16a34a;
+      box-shadow: 0 3px 12px rgba(22,163,74,.1);
+      transform: translateY(-1px);
+    }
+    .qa-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .qa-info { flex: 1; min-width: 0; }
+    .qa-title { font-size: 13.5px; font-weight: 700; color: #1e293b; }
+    .qa-desc  { font-size: 12px; color: #94a3b8; margin-top: 1px; }
+    .qa-arrow { color: #cbd5e1; display: flex; align-items: center; flex-shrink: 0; }
+    .qa-item:hover .qa-arrow { color: #16a34a; }
+  </style>
+</head>
+<body>
+
+<div class="sb-overlay" id="sb-overlay"></div>
+
+<div class="dash-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-logo">🏪</div>
+      <div><div class="sb-brand-name">PURBALINGGA MART</div><div class="sb-brand-sub">Admin Control Panel</div></div>
+    </div>
+    <div class="sb-admin-badge">
+      <div class="sab-icon">👑</div>
+      <div><div class="sab-name">Administrator</div><div class="sab-role">Super Admin</div></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section-label">Overview</div>
+      <div class="sb-item active" data-section="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard</span></div>
+      <div class="sb-section-label">Manajemen</div>
+      <div class="sb-item" data-section="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg><span>Kelola Produk</span><span class="sb-badge" id="sb-prod-badge">0</span></div>
+      <div class="sb-item" data-section="sellers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Kelola Seller</span><span class="sb-badge" id="sb-seller-badge">0</span></div>
+      <div class="sb-section-label">Analitik</div>
+      <div class="sb-item" data-section="stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Statistik</span></div>
+      <div class="sb-item" data-section="transactions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg><span>Transaksi</span><span class="sb-badge" id="sb-tx-badge">0</span></div>
+      <div class="sb-section-label">Sistem</div>
+      <a href="profile.html" class="sb-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profil Saya</span></a>
+      <div class="sb-item" data-section="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Pengaturan</span></div>
+      <a href="index.html" class="sb-item" style="color:rgba(255,255,255,.45)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span>Lihat Marketplace</span></a>
+      <div class="sb-item logout" onclick="PM_AUTH.logout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Keluar</span></div>
+    </nav>
+    <div class="sb-foot"><div>v3.0 Admin · <a href="index.html">Marketplace</a></div></div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main-area">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="topbar-title" id="topbar-title">Dashboard</span>
+      <div class="topbar-search">
+        <input type="search" id="topbar-search" placeholder="Cari produk, seller..." autocomplete="off" oninput="handleTopbarSearch(this.value)"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="topbar-right">
+        <!-- Notifikasi realtime -->
+        <div style="position:relative">
+          <button class="tb-icon-btn" id="tb-notif-btn" onclick="toggleAdminNotif()" title="Notifikasi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <div class="tb-notif-dot" id="tb-notif-dot" style="display:none"></div>
+          </button>
+          <div class="tb-notif-dropdown" id="tb-notif-dropdown" style="display:none">
+            <div class="tb-notif-head">🔔 Notifikasi</div>
+            <div id="tb-notif-list"></div>
+          </div>
+        </div>
+        <!-- Profile dropdown -->
+        <div style="position:relative" id="pm-user-menu">
+          <button class="tb-profile" id="pm-profile-btn" onclick="PM_AUTH._toggleDrop()">
+            <img id="adm-avatar" src="https://picsum.photos/seed/adminplg/80/80" alt="Admin" style="width:34px;height:34px;border-radius:50%;object-fit:cover"/>
+            <div class="tb-profile-info">
+              <span class="tb-profile-name" id="adm-name-topbar">Administrator</span>
+              <span class="tb-profile-role">👑 Super Admin</span>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="pm-dropdown" id="pm-dropdown"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- DASHBOARD -->
+      <section class="page active" id="page-dashboard">
+        <div class="page-header">
+          <div class="page-header-left"><h1>Dashboard Admin 👑</h1><p>Ringkasan performa marketplace Purbalingga Mart — data realtime dari localStorage</p></div>
+          <div class="page-header-right">
+            <button class="btn btn-outline" onclick="exportAllData()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export Laporan
+            </button>
+            <button class="btn btn-solid" onclick="navigate('products')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+              Kelola Produk
+            </button>
+          </div>
+        </div>
+
+        <!-- Stat cards — filled by admin.js -->
+        <div class="stats-grid">
+          <div class="stat-card"><div><div class="stat-label">Total Produk</div><div class="stat-value" id="adm-total-products">0</div><div class="stat-sub up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>realtime dari DB</div></div><div class="stat-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Produk Aktif</div><div class="stat-value" id="adm-active-products">0</div><div class="stat-sub up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>tampil di marketplace</div></div><div class="stat-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Total Seller</div><div class="stat-value" id="adm-total-sellers">0</div><div class="stat-sub up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>+1 bulan ini</div></div><div class="stat-icon ic-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Est. Total Pendapatan</div><div class="stat-value" id="adm-est-revenue" style="font-size:17px">Rp 0</div><div class="stat-sub up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23,6 13.5,15.5 8.5,10.5 1,18"/><polyline points="17,6 23,6 23,12"/></svg>+22% vs bulan lalu</div></div><div class="stat-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div></div>
+        </div>
+
+        <!-- Row 2 chips -->
+        <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
+          <div style="background:var(--wh);border:1.5px solid var(--brd);border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:10px;flex:1;min-width:140px"><div style="font-size:22px">🏪</div><div><div style="font-size:11px;font-weight:700;color:var(--txt-m);text-transform:uppercase;letter-spacing:.3px">Total Buyer</div><div style="font-size:20px;font-weight:800;color:var(--g)" id="adm-total-buyers">0</div></div></div>
+          <div style="background:var(--wh);border:1.5px solid var(--brd);border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:10px;flex:1;min-width:140px"><div style="font-size:22px">🔴</div><div><div style="font-size:11px;font-weight:700;color:var(--txt-m);text-transform:uppercase;letter-spacing:.3px">Produk Promo</div><div style="font-size:20px;font-weight:800;color:var(--rd)" id="adm-total-promo">0</div></div></div>
+          <div style="background:var(--wh);border:1.5px solid var(--brd);border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:10px;flex:1;min-width:140px"><div style="font-size:22px">🗂️</div><div><div style="font-size:11px;font-weight:700;color:var(--txt-m);text-transform:uppercase;letter-spacing:.3px">Kategori Aktif</div><div style="font-size:20px;font-weight:800;color:var(--bl)" id="adm-total-categories">0</div></div></div>
+          <div style="background:var(--wh);border:1.5px solid var(--brd);border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:10px;flex:1;min-width:140px"><div style="font-size:22px">📍</div><div><div style="font-size:11px;font-weight:700;color:var(--txt-m);text-transform:uppercase;letter-spacing:.3px">Lokasi Terlayani</div><div style="font-size:20px;font-weight:800;color:var(--or)" id="adm-total-locations">0</div></div></div>
+        </div>
+
+        <!-- Category breakdown + Quick Actions -->
+        <div class="grid-3-1" style="margin-bottom:20px">
+          <div class="card">
+            <div class="card-head"><div><h3>🗂️ Distribusi Produk per Kategori</h3><p>Berdasarkan data localStorage realtime</p></div></div>
+            <div class="card-body" id="adm-cat-breakdown" style="padding:16px"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>⚡ Aksi Cepat</h3></div>
+            <div class="card-body" style="padding:14px">
+              <div class="quick-actions">
+                <div class="qa-item" onclick="navigate('products')">
+                  <div class="qa-icon" style="background:#f0fdf4">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" width="22" height="22"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                  </div>
+                  <div class="qa-info"><div class="qa-title">Kelola Produk</div><div class="qa-desc">Lihat &amp; moderasi semua produk</div></div>
+                  <div class="qa-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="9,18 15,12 9,6"/></svg></div>
+                </div>
+                <div class="qa-item" onclick="navigate('sellers')">
+                  <div class="qa-icon" style="background:#eff6ff">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                  </div>
+                  <div class="qa-info"><div class="qa-title">Kelola Seller</div><div class="qa-desc">Lihat semua toko terdaftar</div></div>
+                  <div class="qa-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="9,18 15,12 9,6"/></svg></div>
+                </div>
+                <div class="qa-item" onclick="navigate('stats')">
+                  <div class="qa-icon" style="background:#fff7ed">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" width="22" height="22"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  </div>
+                  <div class="qa-info"><div class="qa-title">Statistik</div><div class="qa-desc">Analitik marketplace</div></div>
+                  <div class="qa-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="9,18 15,12 9,6"/></svg></div>
+                </div>
+                <div class="qa-item" onclick="resetDatabase()">
+                  <div class="qa-icon" style="background:#fef2f2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" width="22" height="22"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+                  </div>
+                  <div class="qa-info"><div class="qa-title">Reset Database</div><div class="qa-desc">Kembalikan ke data awal</div></div>
+                  <div class="qa-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="9,18 15,12 9,6"/></svg></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KELOLA PRODUK -->
+      <section class="page" id="page-products">
+        <div class="page-header">
+          <div class="page-header-left"><h1>Kelola Produk</h1><p>Semua produk marketplace — data realtime dari localStorage</p></div>
+          <div class="page-header-right">
+            <button class="btn btn-outline" onclick="exportProductsCsv()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export CSV
+            </button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="table-controls">
+            <div class="tbl-search" style="flex:1;min-width:200px">
+              <input id="adm-prod-search" type="search" placeholder="Cari produk atau seller..." oninput="filterAdminProducts()"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <select class="tbl-filter" id="adm-cat-filter" onchange="filterAdminProducts()"><option value="">Semua Kategori</option><option value="makanan">🍱 Makanan</option><option value="minuman">☕ Minuman</option><option value="kerajinan">🧶 Kerajinan</option><option value="pertanian">🌾 Pertanian</option><option value="fashion">👗 Fashion</option></select>
+            <select class="tbl-filter" id="adm-status-filter" onchange="filterAdminProducts()"><option value="">Semua Status</option><option value="active">Aktif</option><option value="suspended">Suspended</option></select>
+          </div>
+          <div id="admin-products-list" style="padding:0 0 8px">
+            <div class="pm-empty-state" style="padding:48px"><div class="pm-empty-icon">📦</div><div class="pm-empty-title">Memuat...</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KELOLA SELLER -->
+      <section class="page" id="page-sellers">
+        <div class="page-header">
+          <div class="page-header-left"><h1>Kelola Seller</h1><p>Semua toko terdaftar di marketplace</p></div>
+        </div>
+        <div class="card">
+          <div class="table-controls">
+            <div class="tbl-search" style="flex:1;min-width:200px">
+              <input id="adm-seller-search" type="search" placeholder="Cari nama toko..." oninput="filterAdminSellers()"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+          </div>
+          <div id="admin-sellers-list" style="padding:0 0 8px">
+            <div class="pm-empty-state" style="padding:48px"><div class="pm-empty-icon">🏪</div><div class="pm-empty-title">Memuat...</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATISTIK -->
+      <section class="page" id="page-stats">
+        <div class="page-header">
+          <div class="page-header-left"><h1>Statistik Marketplace</h1><p>Analitik lengkap — data realtime dari localStorage</p></div>
+        </div>
+        <div class="stats-grid" style="margin-bottom:24px">
+          <div class="stat-card"><div><div class="stat-label">Total Produk Aktif</div><div class="stat-value" id="stats-active-prod">-</div></div><div class="stat-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Total Terjual</div><div class="stat-value" id="stats-total-sold">-</div></div><div class="stat-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Seller Aktif</div><div class="stat-value" id="stats-sellers">-</div></div><div class="stat-icon ic-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Est. GMV</div><div class="stat-value" id="stats-gmv" style="font-size:17px">-</div></div><div class="stat-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div></div>
+        </div>
+
+        <!-- Top 5 produk -->
+        <div class="card" style="margin-bottom:18px">
+          <div class="card-head"><h3>🏆 Top 5 Produk Terlaris (Semua Seller)</h3></div>
+          <div id="stats-top5" style="overflow-x:auto"></div>
+        </div>
+
+        <!-- Category breakdown -->
+        <div class="card">
+          <div class="card-head"><h3>🗂️ Distribusi Kategori Produk</h3></div>
+          <div class="card-body" id="stats-cat-bars" style="padding:16px"></div>
+        </div>
+      </section>
+
+      <!-- TRANSAKSI -->
+      <section class="page" id="page-transactions">
+        <div class="page-header">
+          <div class="page-header-left"><h1>Semua Transaksi</h1><p>Riwayat transaksi marketplace — data realtime</p></div>
+          <div class="page-header-right">
+            <button class="btn btn-outline" onclick="exportTransactionsCsv()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export CSV
+            </button>
+            <a href="orders.html" class="btn btn-solid" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+              Buka Order Manager
+            </a>
+          </div>
+        </div>
+        <!-- Stats -->
+        <div class="stats-grid" style="margin-bottom:18px">
+          <div class="stat-card"><div><div class="stat-label">Total Transaksi</div><div class="stat-value" id="adm-tx-count">0</div></div><div class="stat-icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Pending</div><div class="stat-value" id="adm-tx-pending" style="color:var(--or)">0</div></div><div class="stat-icon ic-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Selesai</div><div class="stat-value" id="adm-tx-done" style="color:var(--g)">0</div></div><div class="stat-icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg></div></div>
+          <div class="stat-card"><div><div class="stat-label">Total Revenue</div><div class="stat-value" id="adm-tx-revenue" style="font-size:15px">Rp 0</div></div><div class="stat-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div></div>
+        </div>
+        <!-- Filter -->
+        <div class="card" style="padding:14px 18px;margin-bottom:14px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <div class="tbl-search" style="flex:1;min-width:200px">
+              <input id="adm-tx-search" type="search" placeholder="Cari ID, nama pembeli..." oninput="renderAdminTransactions()"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <select class="tbl-filter" id="adm-tx-status" onchange="renderAdminTransactions()">
+              <option value="">Semua Status</option>
+              <option value="pending">⏳ Pending</option>
+              <option value="diproses">🔄 Diproses</option>
+              <option value="dikirim">🚚 Dikirim</option>
+              <option value="selesai">✅ Selesai</option>
+            </select>
+          </div>
+        </div>
+        <div class="card">
+          <div id="admin-tx-list" style="padding:0 0 8px">
+            <div class="pm-empty-state" style="padding:40px"><div class="pm-empty-icon">📋</div><div class="pm-empty-title">Memuat transaksi...</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PENGATURAN -->
+      <section class="page" id="page-settings">
+        <div class="page-header">
+          <div class="page-header-left"><h1>Pengaturan Marketplace</h1><p>Konfigurasi global Purbalingga Mart</p></div>
+          <div class="page-header-right"><button class="btn btn-solid" onclick="PM_AUTH.toast('✅ Pengaturan disimpan!','ok')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17,21 17,13 7,13 7,21"/><polyline points="7,3 7,8 15,8"/></svg>Simpan</button></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3>🏪 Informasi Marketplace</h3></div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:14px">
+              <div class="form-group"><label class="form-label">Nama Marketplace</label><input class="form-input" type="text" value="Purbalingga Mart"/></div>
+              <div class="form-group"><label class="form-label">Tagline</label><input class="form-input" type="text" value="Marketplace Lokal UMKM Purbalingga"/></div>
+              <div class="form-group"><label class="form-label">Email Admin</label><input class="form-input" type="email" value="admin@purbalinggamart.id"/></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>⚙️ Pengaturan Sistem</h3></div>
+            <div class="card-body">
+              <div class="setting-row"><div class="setting-info"><h4>Registrasi Seller Terbuka</h4><p>Izinkan pendaftaran toko baru</p></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+              <div class="setting-row"><div class="setting-info"><h4>Auto-approve Produk</h4><p>Produk langsung aktif tanpa review</p></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+              <div class="setting-row" style="border-bottom:none"><div class="setting-info"><h4>Chatbot Aktif</h4><p>Tampilkan chatbot di marketplace</p></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger zone -->
+        <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:var(--r-md);padding:18px;margin-top:18px">
+          <div style="font-size:13.5px;font-weight:700;color:#991b1b;margin-bottom:6px">⚠️ Zona Berbahaya — localStorage</div>
+          <div style="font-size:12.5px;color:#b91c1c;margin-bottom:12px">Tindakan berikut mempengaruhi data localStorage secara permanen.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-danger btn-sm" onclick="resetDatabase()">🔄 Reset ke Data Awal</button>
+            <button class="btn btn-outline btn-sm" onclick="clearCart()">🛒 Bersihkan Semua Keranjang</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<!-- SCRIPTS -->
+<script src="auth.js"></script>
+<script src="storage.js"></script>
+<script src="transaction.js"></script>
+<script src="admin.js"></script>
+
+<script>
+/* ── Navigation ─────────────────────────────────────── */
+function navigate(section) {
+  const srch = document.getElementById('topbar-search');
+  if (srch) srch.value = '';
+  document.querySelectorAll('.sb-item').forEach(el => el.classList.toggle('active', el.dataset.section === section));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + section);
+  if (page) page.classList.add('active');
+  const titles = { dashboard:'Dashboard Admin 👑', products:'Kelola Produk', sellers:'Kelola Seller', stats:'Statistik Marketplace', transactions:'Semua Transaksi', settings:'Pengaturan' };
+  document.getElementById('topbar-title').textContent = titles[section] || section;
+  if (section === 'products')     PM_ADMIN.renderAdminProducts();
+  if (section === 'sellers')      PM_ADMIN.renderAdminSellers();
+  if (section === 'stats')        renderAdminStats();
+  if (section === 'transactions') renderAdminTransactions();
+}
+
+/* ── Hamburger ───────────────────────────────────────── */
+document.getElementById('hamburger')?.addEventListener('click', () => {
+  document.querySelector('.sidebar').classList.toggle('mobile-open');
+  document.getElementById('sb-overlay').classList.toggle('show');
+});
+document.getElementById('sb-overlay')?.addEventListener('click', () => {
+  document.querySelector('.sidebar').classList.remove('mobile-open');
+  document.getElementById('sb-overlay').classList.remove('show');
+});
+document.querySelectorAll('.sb-item').forEach(el => {
+  if (el.dataset.section) el.addEventListener('click', () => {
+    navigate(el.dataset.section);
+    document.querySelector('.sidebar').classList.remove('mobile-open');
+    document.getElementById('sb-overlay').classList.remove('show');
+  });
+});
+
+/* ── Filter functions ────────────────────────────────── */
+function filterAdminProducts() {
+  const q      = document.getElementById('adm-prod-search')?.value.toLowerCase() || '';
+  const cat    = document.getElementById('adm-cat-filter')?.value || '';
+  const status = document.getElementById('adm-status-filter')?.value || '';
+  let products = PM_DB.getProducts();
+  if (q)      products = products.filter(p => p.name.toLowerCase().includes(q) || (p.storeName||'').toLowerCase().includes(q));
+  if (cat)    products = products.filter(p => p.category === cat);
+  if (status) products = products.filter(p => p.status === status);
+  renderProductsTable(products);
+}
+
+function filterAdminSellers() {
+  const q = document.getElementById('adm-seller-search')?.value.toLowerCase() || '';
+  let sellers = PM_AUTH.getUsers().filter(u => u.role === 'seller');
+  if (q) sellers = sellers.filter(s => (s.storeName||'').toLowerCase().includes(q) || s.name.toLowerCase().includes(q));
+  renderSellersTable(sellers);
+}
+
+function handleTopbarSearch(q) {
+  const active = document.querySelector('.page.active');
+  if (!active) return;
+  if (active.id === 'page-products') {
+    document.getElementById('adm-prod-search').value = q;
+    filterAdminProducts();
+  } else if (active.id === 'page-sellers') {
+    document.getElementById('adm-seller-search').value = q;
+    filterAdminSellers();
+  }
+}
+
+/* ── Render tables (wrappers that accept filtered data) ── */
+function renderProductsTable(products) {
+  const el = document.getElementById('admin-products-list');
+  if (!el) return;
+  const fmt = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+  if (!products || !products.length) {
+    el.innerHTML = `<div class="pm-empty-state" style="padding:48px"><div class="pm-empty-icon">🔍</div><div class="pm-empty-title">Tidak ada produk ditemukan</div></div>`;
+    return;
+  }
+  el.innerHTML = `<div style="overflow-x:auto"><table class="sp-table">
+    <thead><tr><th>Produk</th><th>Toko</th><th>Kategori</th><th>Harga</th><th>Stok</th><th>Terjual</th><th>Status</th><th>Aksi Admin</th></tr></thead>
+    <tbody>${products.map(p => `<tr>
+      <td><div style="display:flex;align-items:center;gap:10px"><img src="${p.image}" onerror="this.src='https://picsum.photos/seed/${p.id}/80/80'" style="width:42px;height:42px;border-radius:8px;object-fit:cover;flex-shrink:0"><div style="font-weight:600;font-size:13px">${p.name}</div></div></td>
+      <td style="font-size:12.5px;color:#64748b">${p.storeName||'-'}</td>
+      <td><span class="sp-cat-tag">${p.category}</span></td>
+      <td style="font-weight:700;color:#16a34a;font-size:13px">${fmt(p.price)}</td>
+      <td style="font-weight:600">${p.stock}</td>
+      <td style="font-weight:600">${p.sold}</td>
+      <td><span class="sp-status ${p.status==='active'?'sp-active':'sp-suspended'}">${p.status}</span></td>
+      <td><div style="display:flex;gap:5px">
+        ${p.status==='active'
+          ? `<button class="sp-btn sp-btn-suspend" onclick="PM_ADMIN.suspendProduct('${p.id}')">⏸ Suspend</button>`
+          : `<button class="sp-btn sp-btn-edit" onclick="PM_ADMIN.activateProduct('${p.id}')">▶ Aktifkan</button>`}
+        <button class="sp-btn sp-btn-del" onclick="PM_ADMIN.deleteProduct('${p.id}')">🗑</button>
+      </div></td>
+    </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+function renderSellersTable(sellers) {
+  const el = document.getElementById('admin-sellers-list');
+  if (!el) return;
+  const fmt = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+  if (!sellers || !sellers.length) {
+    el.innerHTML = `<div class="pm-empty-state" style="padding:48px"><div class="pm-empty-icon">🏪</div><div class="pm-empty-title">Tidak ada seller</div></div>`;
+    return;
+  }
+  el.innerHTML = `<div style="overflow-x:auto"><table class="sp-table">
+    <thead><tr><th>Seller</th><th>Toko</th><th>Kategori</th><th>Lokasi</th><th>Produk</th><th>Terjual</th><th>Status</th></tr></thead>
+    <tbody>${sellers.map(s => {
+      const prods = PM_DB.getProductsBySeller(s.username);
+      const sold  = prods.reduce((sum,p) => sum + (p.sold||0), 0);
+      return `<tr>
+        <td><div style="display:flex;align-items:center;gap:10px"><img src="${s.avatar||'https://picsum.photos/seed/default/80/80'}" style="width:36px;height:36px;border-radius:50%;object-fit:cover"><div><div style="font-weight:600;font-size:13px">${s.name}</div><div style="font-size:11px;color:#94a3b8">@${s.username}</div></div></div></td>
+        <td style="font-weight:600">${s.storeName||'-'}</td>
+        <td><span class="sp-cat-tag">${s.category||'-'}</span></td>
+        <td style="font-size:12.5px;color:#64748b">📍 ${s.location||'-'}</td>
+        <td style="font-weight:600">${prods.length}</td>
+        <td style="font-weight:600">${sold}</td>
+        <td><span class="sp-status sp-active">active</span></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table></div>`;
+}
+
+/* ── Stats page ─────────────────────────────────────── */
+function renderAdminStats() {
+  const products = PM_DB.getProducts();
+  const active   = products.filter(p => p.status === 'active');
+  const sellers  = PM_AUTH.getUsers().filter(u => u.role === 'seller');
+  const totalSold= products.reduce((s,p) => s + (p.sold||0), 0);
+  const gmv      = products.reduce((s,p) => s + (p.sold||0) * p.price, 0);
+  const fmt      = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+
+  document.getElementById('stats-active-prod') && (document.getElementById('stats-active-prod').textContent = active.length);
+  document.getElementById('stats-total-sold')  && (document.getElementById('stats-total-sold').textContent = totalSold);
+  document.getElementById('stats-sellers')     && (document.getElementById('stats-sellers').textContent = sellers.length);
+  document.getElementById('stats-gmv')         && (document.getElementById('stats-gmv').textContent = fmt(gmv));
+
+  // Top 5
+  const top5El = document.getElementById('stats-top5');
+  if (top5El) {
+    const top = [...products].sort((a,b) => b.sold - a.sold).slice(0,5);
+    top5El.innerHTML = `<div style="overflow-x:auto"><table class="sp-table">
+      <thead><tr><th>#</th><th>Produk</th><th>Toko</th><th>Harga</th><th>Terjual</th><th>Est. Pendapatan</th></tr></thead>
+      <tbody>${top.map((p,i) => `<tr>
+        <td style="font-weight:800;color:var(--g)">#${i+1}</td>
+        <td style="font-weight:600">${p.name}</td>
+        <td style="color:#64748b">${p.storeName||'-'}</td>
+        <td>${fmt(p.price)}</td>
+        <td style="font-weight:700">${p.sold}</td>
+        <td style="color:#16a34a;font-weight:800">${fmt(p.sold*p.price)}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>`;
+  }
+
+  // Category bars
+  const catEl = document.getElementById('stats-cat-bars');
+  if (catEl) {
+    const cats = {};
+    products.forEach(p => { cats[p.category] = (cats[p.category]||0)+1; });
+    catEl.innerHTML = Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,n]) => `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <span style="font-size:13px;color:#1e293b;min-width:110px;text-transform:capitalize;font-weight:600">${c}</span>
+        <div style="flex:1;background:#f1f5f9;border-radius:5px;height:10px;overflow:hidden">
+          <div style="width:${Math.round(n/products.length*100)}%;height:100%;background:#16a34a;border-radius:5px;transition:width .6s ease"></div>
+        </div>
+        <span style="font-size:12px;color:#64748b;min-width:24px;text-align:right;font-weight:700">${n}</span>
+      </div>`).join('');
+  }
+}
+
+/* ── Utility: Override PM_ADMIN render fns to use table wrappers ── */
+document.addEventListener('DOMContentLoaded', () => {
+  // Override admin.js renderAdminProducts to call our wrapper
+  const origRenderProducts = PM_ADMIN.renderAdminProducts;
+  PM_ADMIN.renderAdminProducts = function(filter) {
+    let products = PM_DB.getProducts();
+    if (filter) {
+      const q = filter.toLowerCase();
+      products = products.filter(p => p.name.toLowerCase().includes(q) || (p.storeName||'').toLowerCase().includes(q));
+    }
+    renderProductsTable(products);
+    // Also update sidebar badge
+    document.getElementById('sb-prod-badge') && (document.getElementById('sb-prod-badge').textContent = PM_DB.getProducts().length);
+  };
+
+  const origRenderSellers = PM_ADMIN.renderAdminSellers;
+  PM_ADMIN.renderAdminSellers = function() {
+    renderSellersTable(PM_AUTH.getUsers().filter(u => u.role === 'seller'));
+    // Update sidebar badge
+    document.getElementById('sb-seller-badge') && (document.getElementById('sb-seller-badge').textContent = PM_AUTH.getUsers().filter(u=>u.role==='seller').length);
+  };
+
+  // Initial render
+  PM_ADMIN.renderAdminProducts();
+  PM_ADMIN.renderAdminSellers();
+  updateSidebarBadges();
+});
+
+/* ── Update sidebar badges ───────────────────────────── */
+function updateSidebarBadges() {
+  document.getElementById('sb-prod-badge')   && (document.getElementById('sb-prod-badge').textContent = PM_DB.getProducts().length);
+  document.getElementById('sb-seller-badge') && (document.getElementById('sb-seller-badge').textContent = PM_AUTH.getUsers().filter(u=>u.role==='seller').length);
+}
+
+/* ── Export CSV ─────────────────────────────────────── */
+function exportProductsCsv() {
+  const products = PM_DB.getProducts();
+  const csv = ['ID,Nama,Toko,Kategori,Harga,Stok,Terjual,Status',
+    ...products.map(p => [p.id,`"${p.name}"`,`"${p.storeName||''}"`,p.category,p.price,p.stock,p.sold,p.status].join(','))
+  ].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download = 'semua-produk-purbalinggamart.csv';
+  a.click();
+  PM_AUTH.toast('✅ Export berhasil!','ok');
+}
+
+function exportAllData() {
+  const data = {
+    products: PM_DB.getProducts(),
+    users: PM_AUTH.getUsers(),
+    exportedAt: new Date().toISOString()
+  };
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+  a.download = 'purbalingga-mart-backup.json';
+  a.click();
+  PM_AUTH.toast('✅ Backup JSON berhasil didownload!','ok');
+}
+
+/* ── Reset database ─────────────────────────────────── */
+function resetDatabase() {
+  if (!confirm('Reset semua data produk ke kondisi awal?\n\nData yang ditambahkan seller akan hilang!')) return;
+  localStorage.removeItem('pm_db_initialized');
+  localStorage.removeItem('pm_products');
+  localStorage.removeItem('pm_cart');
+  PM_DB.init();
+  PM_AUTH.toast('🔄 Database direset ke data awal!','ok');
+  PM_ADMIN.renderAdminDashboard();
+  PM_ADMIN.renderAdminProducts();
+  updateSidebarBadges();
+}
+
+function clearCart() {
+  if (!confirm('Bersihkan semua keranjang belanja?')) return;
+  PM_DB.clearCart();
+  PM_AUTH.toast('🛒 Keranjang dibersihkan.','ok');
+}
+
+/* ── Admin Transactions ─────────────────────────────── */
+function renderAdminTransactions() {
+  const fmt = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+  const fmtDate = d => new Date(d).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  const STATUS = {pending:{l:'Menunggu',c:'#d97706',bg:'#fef3c7'},diproses:{l:'Diproses',c:'#2563eb',bg:'#dbeafe'},dikirim:{l:'Dikirim',c:'#ea580c',bg:'#fed7aa'},selesai:{l:'Selesai',c:'#16a34a',bg:'#dcfce7'}};
+
+  let txns = PM_TX.getAll();
+  const q      = document.getElementById('adm-tx-search')?.value.toLowerCase()||'';
+  const status = document.getElementById('adm-tx-status')?.value||'';
+  if (q)      txns = txns.filter(t => t.transactionId.toLowerCase().includes(q)||t.buyerName?.toLowerCase().includes(q));
+  if (status) txns = txns.filter(t => t.status === status);
+
+  // Stats
+  const byS = {}; txns.forEach(t=>{byS[t.status]=(byS[t.status]||0)+1;});
+  const rev  = txns.reduce((s,t)=>s+t.total,0);
+  document.getElementById('adm-tx-count')   && (document.getElementById('adm-tx-count').textContent = txns.length);
+  document.getElementById('adm-tx-pending') && (document.getElementById('adm-tx-pending').textContent = byS.pending||0);
+  document.getElementById('adm-tx-done')    && (document.getElementById('adm-tx-done').textContent = byS.selesai||0);
+  document.getElementById('adm-tx-revenue') && (document.getElementById('adm-tx-revenue').textContent = fmt(rev));
+  document.getElementById('sb-tx-badge')    && (document.getElementById('sb-tx-badge').textContent = PM_TX.getAll().length);
+
+  const el = document.getElementById('admin-tx-list');
+  if (!el) return;
+  if (!txns.length) {
+    el.innerHTML = `<div class="pm-empty-state" style="padding:48px"><div class="pm-empty-icon">📋</div><div class="pm-empty-title">Tidak ada transaksi ditemukan</div></div>`;
+    return;
+  }
+
+  el.innerHTML = `<div style="overflow-x:auto"><table class="sp-table">
+    <thead><tr><th>ID Transaksi</th><th>Pembeli</th><th>Produk</th><th>Total</th><th>Metode</th><th>Status</th><th>Tgl</th><th>Aksi</th></tr></thead>
+    <tbody>${txns.map(t=>{
+      const s = STATUS[t.status]||STATUS.pending;
+      return `<tr>
+        <td style="font-family:monospace;font-size:11.5px;color:#64748b">${t.transactionId}</td>
+        <td>
+          <div style="font-weight:700;font-size:13px">${t.buyerName}</div>
+          <div style="font-size:11px;color:#94a3b8">${t.address?.city||''}</div>
+        </td>
+        <td style="font-size:12.5px;color:#475569">${t.products.length} produk · ${t.products.reduce((s,p)=>s+p.qty,0)} item</td>
+        <td style="font-weight:800;color:#16a34a;font-size:13px">${fmt(t.total)}</td>
+        <td><span style="background:#f1f5f9;color:#64748b;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:700;text-transform:uppercase">${t.paymentMethod}</span></td>
+        <td><span style="background:${s.bg};color:${s.c};padding:3px 8px;border-radius:5px;font-size:11px;font-weight:800">${s.l}</span></td>
+        <td style="font-size:11.5px;color:#94a3b8">${fmtDate(t.createdAt)}</td>
+        <td>
+          <div style="display:flex;gap:5px">
+            <a href="invoice.html?id=${t.transactionId}" target="_blank" class="sp-btn sp-btn-edit">🧾 Invoice</a>
+            ${t.status!=='selesai'?`<button class="sp-btn sp-btn-edit" onclick="adminCompleteTx('${t.transactionId}')">✅</button>`:''}
+            <button class="sp-btn sp-btn-del" onclick="adminDeleteTx('${t.transactionId}')">🗑</button>
+          </div>
+        </td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table></div>`;
+}
+
+function adminCompleteTx(id) {
+  PM_TX.updateStatus(id,'selesai','Admin menyelesaikan transaksi');
+  PM_AUTH.toast('✅ Transaksi diselesaikan','ok');
+  renderAdminTransactions();
+}
+
+function adminDeleteTx(id) {
+  if (!confirm('Hapus transaksi ini?')) return;
+  const all = PM_TX.getAll().filter(t=>t.transactionId!==id);
+  PM_TX.saveAll(all);
+  PM_AUTH.toast('🗑️ Transaksi dihapus','warn');
+  renderAdminTransactions();
+}
+
+function exportTransactionsCsv() {
+  const fmt = n => n;
+  const txns = PM_TX.getAll();
+  const csv = ['ID,Pembeli,Kota,Total,Metode,Status,Tanggal',
+    ...txns.map(t=>[t.transactionId,`"${t.buyerName}"`,`"${t.address?.city||''}"`,t.total,t.paymentMethod,t.status,new Date(t.createdAt).toLocaleDateString('id-ID')].join(','))
+  ].join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='transaksi-purbalinggamart.csv';
+  a.click();
+  PM_AUTH.toast('✅ Export transaksi berhasil!','ok');
+}
+
+
+/* ── Notifikasi admin realtime ───────────────────────── */
+function updateAdminNotifBadge() {
+  const txns    = PM_TX ? PM_TX.getAll() : [];
+  const pending = txns.filter(t => t.status === 'pending');
+  const dot     = document.getElementById('tb-notif-dot');
+  if (dot) dot.style.display = pending.length > 0 ? 'block' : 'none';
+}
+
+window.toggleAdminNotif = function() {
+  const dd  = document.getElementById('tb-notif-dropdown');
+  if (!dd) return;
+  const open = dd.style.display !== 'none';
+  dd.style.display = open ? 'none' : 'block';
+  if (!open) {
+    const list = document.getElementById('tb-notif-list');
+    const txns = PM_TX ? PM_TX.getAll().filter(t => t.status === 'pending').slice(0,6) : [];
+    const fmt  = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+    if (!txns.length) {
+      list.innerHTML = '<div style="text-align:center;padding:20px;color:#94a3b8;font-size:13px">Tidak ada pesanan pending 🎉</div>';
+    } else {
+      list.innerHTML = txns.map(t => `
+        <div class="tb-notif-item" onclick="navigate('transactions');document.getElementById('tb-notif-dropdown').style.display='none'">
+          <div class="tb-notif-icon">📦</div>
+          <div class="tb-notif-info">
+            <div class="tb-notif-title">Pesanan Menunggu</div>
+            <div class="tb-notif-sub">${t.buyerName} · ${fmt(t.total)}</div>
+            <div class="tb-notif-time">${new Date(t.createdAt).toLocaleString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div>
+          </div>
+        </div>`).join('');
+    }
+  }
+};
+
+/* ── Profile dropdown admin ──────────────────────────── */
+function initAdminDropdown() {
+  const user = PM_AUTH.getCurrentUser();
+  if (!user) return;
+
+  const img = document.getElementById('adm-avatar');
+  if (img) img.src = user.avatar || `https://picsum.photos/seed/${user.username}/80/80`;
+  const nameEl = document.getElementById('adm-name-topbar');
+  if (nameEl) nameEl.textContent = user.name;
+
+  const dd = document.getElementById('pm-dropdown');
+  if (!dd) return;
+  dd.innerHTML = `
+    <div class="pm-drop-user">
+      <img src="${user.avatar || `https://picsum.photos/seed/${user.username}/80/80`}"
+           style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #e2e8f0">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#1e293b">${user.name}</div>
+        <div style="font-size:11px;color:#94a3b8">👑 Admin</div>
+      </div>
+    </div>
+    <div class="pm-drop-divider"></div>
+    <div class="pm-drop-item" onclick="navigate('dashboard');document.getElementById('pm-dropdown').classList.remove('open')">🏠 Dashboard</div>
+    <div class="pm-drop-item" onclick="navigate('products');document.getElementById('pm-dropdown').classList.remove('open')">📦 Kelola Produk</div>
+    <div class="pm-drop-item" onclick="navigate('sellers');document.getElementById('pm-dropdown').classList.remove('open')">🏪 Kelola Seller</div>
+    <div class="pm-drop-item" onclick="window.location.href='profile.html'">👤 Profil Saya</div>
+    <div class="pm-drop-divider"></div>
+    <div class="pm-drop-item pm-drop-item-danger" onclick="PM_AUTH.logout()">🚪 Keluar</div>`;
+}
+
+PM_AUTH._toggleDrop = function() {
+  document.getElementById('pm-dropdown')?.classList.toggle('open');
+};
+
+// Close on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('#pm-user-menu'))
+    document.getElementById('pm-dropdown')?.classList.remove('open');
+  if (!e.target.closest('#tb-notif-btn') && !e.target.closest('#tb-notif-dropdown'))
+    document.getElementById('tb-notif-dropdown') && (document.getElementById('tb-notif-dropdown').style.display = 'none');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  initAdminDropdown();
+  updateAdminNotifBadge();
+  setInterval(updateAdminNotifBadge, 30000);
+});
+
+
+</script>
+</body>
+</html>
