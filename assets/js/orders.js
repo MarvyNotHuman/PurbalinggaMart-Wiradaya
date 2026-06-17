@@ -33,7 +33,60 @@
   let searchQuery  = '';
 
   /* ── Init ────────────────────────────────────────────────── */
-  function init() {
+  /* ── Fetch orders dari Supabase sesuai role ─────────────── */
+  async function fetchOrdersFromSupabase(user) {
+    if (typeof SB === 'undefined') return null;
+    try {
+      let rows;
+      if (user.role === 'buyer') {
+        rows = await SB.get('pm_transactions', `?buyer_id=eq.${user.id}&order=created_at.desc`);
+      } else if (user.role === 'seller') {
+        // Ambil semua transaksi, filter produk milik seller ini
+        rows = await SB.get('pm_transactions', '?order=created_at.desc');
+        rows = rows.filter(r => {
+          try {
+            const prods = typeof r.products === 'string' ? JSON.parse(r.products) : r.products;
+            return prods.some(p => p.sellerUsername === user.username);
+          } catch { return false; }
+        });
+      } else {
+        rows = await SB.get('pm_transactions', '?order=created_at.desc');
+      }
+
+      if (!rows || rows.length === 0) return null;
+
+      // Map kolom Supabase → format yang dipakai orders.js
+      return rows.map(r => ({
+        transactionId:  r.id,
+        buyerId:        r.buyer_id,
+        buyerName:      r.buyer_name,
+        buyerEmail:     r.buyer_email,
+        products:       typeof r.products === 'string' ? JSON.parse(r.products) : r.products,
+        subtotal:       r.subtotal,
+        shipping:       r.shipping,
+        shippingOriginal: r.shipping_original,
+        shippingType:   r.shipping_type,
+        shippingLabel:  r.shipping_label,
+        notes:          r.notes,
+        discount:       r.discount,
+        serviceFee:     r.service_fee,
+        total:          r.total,
+        paymentMethod:  r.payment_method,
+        address:        typeof r.address === 'string' ? JSON.parse(r.address) : r.address,
+        voucher:        r.voucher,
+        voucherLabel:   r.voucher_label,
+        status:         r.status,
+        statusHistory:  typeof r.status_history === 'string' ? JSON.parse(r.status_history) : (r.status_history || []),
+        createdAt:      r.created_at,
+        updatedAt:      r.updated_at,
+      }));
+    } catch (e) {
+      console.warn('[Orders] Gagal fetch dari Supabase, pakai localStorage:', e.message);
+      return null;
+    }
+  }
+
+  async function init() {
     if (!PM_AUTH.isLoggedIn()) {
       window.location.href = 'login.html?required=buyer';
       return;
@@ -55,7 +108,8 @@
 
   /* ── BUYER ORDERS ────────────────────────────────────────── */
   function renderBuyerOrders(buyerId) {
-    const txns = PM_TX.getByBuyer(buyerId);
+    const sbTxns = await fetchOrdersFromSupabase(user);
+    const txns = sbTxns || PM_TX.getByBuyer(buyerId);
 
     // Update page heading
     setTxt('orders-heading', 'Pesanan Saya');
@@ -67,7 +121,8 @@
 
   /* ── SELLER ORDERS ───────────────────────────────────────── */
   function renderSellerOrders(sellerUsername) {
-    const txns = PM_TX.getBySeller(sellerUsername);
+    const sbTxns = await fetchOrdersFromSupabase(user);
+    const txns = sbTxns || PM_TX.getBySeller(sellerUsername);
     setTxt('orders-heading', 'Pesanan Masuk');
     setTxt('orders-sub',     `${txns.length} transaksi masuk`);
     renderOrderStats(txns);
@@ -81,7 +136,8 @@
 
   /* ── ADMIN ORDERS ────────────────────────────────────────── */
   function renderAdminOrders() {
-    const txns = PM_TX.getAll();
+    const sbTxns = await fetchOrdersFromSupabase(user);
+    const txns = sbTxns || PM_TX.getAll();
     setTxt('orders-heading', 'Semua Transaksi');
     setTxt('orders-sub',     `${txns.length} transaksi marketplace`);
     renderOrderStats(txns);
