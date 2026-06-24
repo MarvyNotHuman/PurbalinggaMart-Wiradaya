@@ -478,7 +478,7 @@
       shippingDiscount = effect.shippingDiscount || 0;
     }
 
-    const serviceFee  = Math.round(subtotal * 0.01);
+    const serviceFee  = Math.round(subtotal * 0.1);
     const finalShip   = Math.max(0, shippingCost - shippingDiscount);
     const total       = Math.max(0, subtotal - discount + finalShip + serviceFee);
 
